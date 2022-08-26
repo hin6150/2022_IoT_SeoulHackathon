@@ -156,6 +156,7 @@ export default {
         .then((response) => {
           console.log('post then')
           console.log(response)
+          this.dataChartArray[0].series[0].data = [80, 70, 60, 50, 40, 30]
         })
     },
     goToDetail (typeNum) {
