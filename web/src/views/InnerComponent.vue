@@ -1,9 +1,11 @@
 <template>
   <div>
-    <main>
-      <div class="container py-5">
-        <div class="row mb-4">
-          <h4>기관(마포중앙도서관) 실내데이터</h4>
+    <main style="background-color: #556cff">
+      <div class="container pb-4 pt-5">
+        <div class="row mb-2">
+          <h4 style="color: white; font-weight: bold">
+            기관(마포중앙도서관) 실내데이터
+          </h4>
         </div>
       </div>
       <Splide :options="{ rewind: true, start: this.floor }">
@@ -16,32 +18,39 @@
       </Splide>
     </main>
     <hr />
-    <main style="background-color: white">
-      <div class="mb-4" v-for="active in activeRoom" :key="active">
-        <h4 class="mb-3" style="text-allign: left">{{ active.target }}</h4>
-        <div v-if="active.serial != ''">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" v-for="data in chartData" :key="data">
-                  {{ data }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td v-for="data in chartData" :key="data">
-                  <div v-for="check in floorData[active.floor]" :key="check">
-                    <div v-if="check.Serial == active.serial">
-                      {{ check[data] }}
+    <main class="mt-3" style="background-color: white">
+      <div class="container">
+        <div class="mb-4" v-for="active in activeRoom" :key="active">
+          <h4 class="mb-3" style="text-align: left">{{ active.target }}</h4>
+          <div v-if="active.serial != ''">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th
+                    style="font-size: 7px"
+                    scope="col"
+                    v-for="data in chartData"
+                    :key="data"
+                  >
+                    {{ data }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td v-for="data in chartData" :key="data">
+                    <div v-for="check in floorData[active.floor]" :key="check">
+                      <div v-if="check.Serial == active.serial">
+                        {{ check[data] }}
+                      </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div v-else>센서 정보 없음</div>
         </div>
-        <div v-else>센서 정보 없음</div>
       </div>
     </main>
   </div>

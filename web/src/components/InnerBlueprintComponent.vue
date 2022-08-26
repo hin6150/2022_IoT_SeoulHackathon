@@ -1,13 +1,14 @@
 <template>
-  <div class="container">
-    <h4>{{ floor }}층</h4>
+  <div class="container" style="color: white">
+    <h4 v-if="floor === 0">지하 1층</h4>
+    <h4 v-else>{{ floor }}층</h4>
     <text>
       {{ sampleData }}
     </text>
     <div class="col-md-15 mb-3 align-self-center">
       <div
-        class="row-md-8 px-4 py-4 rounded-4"
-        style="background-color: #f7f7f7"
+        class="row-md-8 mt-3 mb-5 mx-4 shadow px-4 py-4 rounded-4"
+        style="background-color: white; border: 1px solid"
       >
         <img
           :src="imgSrc"
@@ -43,7 +44,7 @@ export default {
   data() {
     return {
       floor: 0, // 현재 보여줄 층 번호
-      sampleData: 'Out',
+      sampleData: '시설을 클릭해주세요',
       imgSrc: '',
       mapSrc: [],
       width: 0,
@@ -63,10 +64,10 @@ export default {
       this.useMap = '#' + this.mapId
     },
     over(title) {
-      this.sampleData = title + ' 접근'
+      this.sampleData = title
     },
     out() {
-      this.sampleData = 'Out'
+      this.sampleData = '시설을 클릭해주세요'
     },
     roomClicked(title) {
       this.$emit('childEvent', title)
