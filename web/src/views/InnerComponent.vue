@@ -19,8 +19,8 @@
     </main>
     <hr />
     <main style="background-color: white">
-      <div v-for="active in activeRoom" :key="active">
-        <h4 style="text-allign: left">{{ active.target }}</h4>
+      <div class="mb-4" v-for="active in activeRoom" :key="active">
+        <h4 class="mb-3" style="text-allign: left">{{ active.target }}</h4>
         <table class="table">
           <thead>
             <tr>
@@ -56,13 +56,21 @@ export default {
     return {
       floor: 0,
       activeRoom: [],
-      chartLength: 0
+      chartLength: 0,
+      axiosFloorData: [],
+      floorData: [
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
     }
   },
   methods: {
     roomClicked(e) {
       let check = true
-      console.log(this.chartLength)
       for (const i in this.chartLength) {
         console.log(i)
         if (this.activeRoom[i] === e) {
@@ -70,18 +78,38 @@ export default {
           this.chartLength--
           check = false
           console.log('pop')
+          console.log(this.activeRoom)
         }
       }
       if (check === true) {
         this.activeRoom.push(e)
         this.chartLength++
       }
-      console.log(this.chartLength)
       console.log(this.activeRoom)
     }
   },
   created() {
     this.floor = this.$route.query.floor
+    this.$apiGet('/api/floor')
+      .then((response) => {
+        this.axiosFloorData = response.data
+        for (const data of this.axiosFloorData) {
+          if (parseInt(data.floor) === -1) { // 지하 1층
+            this.floorData[0].push(data)
+          } else if (parseInt(data.floor) === 2) { // 2층
+            this.floorData[1].push(data)
+          } else if (parseInt(data.floor) === 3) { // 3층
+            this.floorData[2].push(data)
+          } else if (parseInt(data.floor) === 4) { // 4층
+            this.floorData[3].push(data)
+          } else if (parseInt(data.floor) === 5) { // 5층
+            this.floorData[4].push(data)
+          } else if (parseInt(data.floor) === 6) { // 6층
+            this.floorData[5].push(data)
+          }
+        }
+        console.log(this.floorData)
+      })
   },
   name: 'App',
   components: { InnerBlueprintComponent, Splide, SplideSlide },
