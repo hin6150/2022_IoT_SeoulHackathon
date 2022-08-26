@@ -170,7 +170,6 @@ export default {
           this.parkInfoList[i].enable_park = response.data[i].availableparking
           this.parkInfoList[i].unable_park = response.data[i].emptyparking
         }
-        console.log(response.data)
       })
   },
   methods: {

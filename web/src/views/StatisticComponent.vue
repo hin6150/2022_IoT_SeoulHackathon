@@ -89,7 +89,8 @@ export default {
         {}, // hum
         {}, // pm10
         {} // pm2.5
-      ]
+      ],
+      postDate: []
     }
   },
   created () {
@@ -100,6 +101,9 @@ export default {
     this.date = [startDate, endDate]
     this.dataChartArray = this.$store.state.iotDataArray
     this.dataChartName = this.$store.state.dataChartName
+    console.log(this.date[0])
+    this.postDate = String(this.date[0]).split(' ')[1]
+    console.log(this.postDate)
   },
   mounted () {
   },

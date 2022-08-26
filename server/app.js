@@ -38,6 +38,12 @@ app.get('/api', (req, res) => {
   console.log(realData);
   res.send(realData);
 })
+// 통계페이지 default 차트 -> D-9일부터 D-2일까지의 일주일 평균값 필요
+// 온도(섭씨 변환), 습도, 소음, 미세먼지, 초미세먼지, 주차장
+// app.get('/api/statistic', (req, res) => {
+//   console.log(realData);
+//   res.send(realData);
+// })
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
