@@ -1,6 +1,7 @@
 const mapF0 = [
   {
     target: '주차 관리실',
+    floor: '0',
     serial: '',
     title: '주차 관리실',
     href: '',
@@ -9,6 +10,7 @@ const mapF0 = [
   },
   {
     target: '점프업',
+    floor: '0',
     serial: '',
     title: '점프업',
     href: '',
@@ -17,6 +19,7 @@ const mapF0 = [
   },
   {
     target: '헤세드 커피',
+    floor: '0',
     serial: '',
     title: '헤세드 커피',
     href: '',
@@ -25,6 +28,7 @@ const mapF0 = [
   },
   {
     target: '구내 식당',
+    floor: '0',
     serial: '',
     title: '구내 식당',
     href: '',
@@ -33,6 +37,7 @@ const mapF0 = [
   },
   {
     target: '에너지 바이즈',
+    floor: '0',
     serial: '',
     title: '에너지 바이즈',
     href: '',
@@ -41,6 +46,7 @@ const mapF0 = [
   },
   {
     target: '소정',
+    floor: '0',
     serial: '',
     title: '소정',
     href: '',
@@ -49,6 +55,7 @@ const mapF0 = [
   },
   {
     target: '이마트24',
+    floor: '0',
     serial: '',
     title: '이마트24',
     href: '',
@@ -57,6 +64,7 @@ const mapF0 = [
   },
   {
     target: '색연필 플러스',
+    floor: '0',
     serial: '',
     title: '색연필 플러스',
     href: '',
@@ -65,6 +73,7 @@ const mapF0 = [
   },
   {
     target: 'MADE 댄스',
+    floor: '0',
     serial: '',
     title: 'MADE 댄스',
     href: '',
@@ -73,6 +82,7 @@ const mapF0 = [
   },
   {
     target: '앤티앤스',
+    floor: '0',
     serial: '',
     title: '앤티앤스',
     href: '',
@@ -81,6 +91,7 @@ const mapF0 = [
   },
   {
     target: '앨리스 바이 미니멜츠',
+    floor: '0',
     serial: '',
     title: '앨리스 바이 미니멜츠',
     href: '',
@@ -89,6 +100,7 @@ const mapF0 = [
   },
   {
     target: '회우정',
+    floor: '0',
     serial: '',
     title: '회우정',
     href: '',
@@ -97,6 +109,7 @@ const mapF0 = [
   },
   {
     target: '공방(아이조은)',
+    floor: '0',
     serial: '',
     title: '공방(아이조은)',
     href: '',
@@ -105,6 +118,7 @@ const mapF0 = [
   },
   {
     target: '공작 문고',
+    floor: '0',
     serial: '',
     title: '공작 문고',
     href: '',
@@ -113,6 +127,7 @@ const mapF0 = [
   },
   {
     target: '하루앤소쿠',
+    floor: '0',
     serial: '',
     title: '하루앤소쿠',
     href: '',
@@ -121,6 +136,7 @@ const mapF0 = [
   },
   {
     target: '환경미화원 휴게실',
+    floor: '0',
     serial: '',
     title: '환경미화원 휴게실',
     href: '',
@@ -129,6 +145,7 @@ const mapF0 = [
   },
   {
     target: '부설주차장',
+    floor: '0',
     serial: '',
     title: '부설주차장',
     href: '',
@@ -140,6 +157,7 @@ const mapF0 = [
 const mapF1 = [
   {
     target: '갤러리',
+    floor: '1',
     serial: '',
     title: '갤러리',
     coords: '67,308,185,399',
@@ -147,6 +165,7 @@ const mapF1 = [
   },
   {
     target: '쁘띠몽드키즈카페',
+    floor: '1',
     serial: '',
     title: '쁘띠몽드키즈카페',
     coords: '273,399,274,307,322,308,322,265,388,264,389,220,440,218,440,398',
@@ -154,6 +173,7 @@ const mapF1 = [
   },
   {
     target: '공영주차장',
+    floor: '1',
     serial: '',
     title: '공영주차장',
     coords:
@@ -164,6 +184,7 @@ const mapF1 = [
 const mapF2 = [
   {
     target: '북카페',
+    floor: '2',
     serial: '',
     title: '북카페',
     coords: '2,222,181,285',
@@ -171,6 +192,7 @@ const mapF2 = [
   },
   {
     target: '임대 시설',
+    floor: '2',
     serial: '',
     title: '임대 시설',
     coords: '0,304,59,398',
@@ -178,6 +200,7 @@ const mapF2 = [
   },
   {
     target: '디지털 창작공간 마마플',
+    floor: '2',
     serial: '',
     title: '디지털 창작공간 마마플',
     coords: '58,303,187,399',
@@ -185,6 +208,7 @@ const mapF2 = [
   },
   {
     target: '꿈나래방',
+    floor: '2',
     serial: 'V01G1613633',
     title: '꿈나래방',
     coords: '352,-1,422,58',
@@ -192,6 +216,7 @@ const mapF2 = [
   },
   {
     target: '수유실',
+    floor: '2',
     serial: 'V01G1613634',
     title: '수유실',
     coords: '291,104,357,129',
@@ -199,6 +224,7 @@ const mapF2 = [
   },
   {
     target: '유아자료실',
+    floor: '2',
     serial: 'V01G1613632',
     title: '유아자료실',
     coords: '294,129,292,203,339,204,356,188,359,129',
@@ -206,6 +232,7 @@ const mapF2 = [
   },
   {
     target: '유아 화장실',
+    floor: '2',
     serial: '',
     title: '유아 화장실',
     coords: '423,109,402,106,391,92,390,74,405,60,422,60',
@@ -213,7 +240,8 @@ const mapF2 = [
   },
   {
     target: '어린이ᆞ유아 자료실',
-    serial: 'V01G1613537',
+    floor: '2',
+    serial: 'V01G161358',
     title: '어린이ᆞ유아 자료실',
     coords:
       '321,104,290,103,294,81,332,81,334,34,351,35,352,57,409,58,390,73,390,90,402,106,420,109,507,115,506,355,356,355,352,317,290,317,291,202,342,206,356,193,359,127,357,103',
@@ -221,6 +249,7 @@ const mapF2 = [
   },
   {
     target: '화페 전시실',
+    floor: '2',
     serial: '',
     title: '화페 전시실',
     coords: '407,238,458,260',
@@ -228,6 +257,7 @@ const mapF2 = [
   },
   {
     target: '누리마루',
+    floor: '2',
     serial: '',
     title: '누리마루',
     coords: '354,357,415,398',
@@ -235,6 +265,7 @@ const mapF2 = [
   },
   {
     target: '뽐내기 방',
+    floor: '2',
     serial: '',
     title: '뽐내기 방',
     coords: '417,355,457,399',
@@ -242,6 +273,7 @@ const mapF2 = [
   },
   {
     target: '모임방',
+    floor: '2',
     serial: '',
     title: '모임방',
     coords: '460,355,507,399',
@@ -249,6 +281,7 @@ const mapF2 = [
   },
   {
     target: '옥외 주차장',
+    floor: '2',
     serial: '',
     title: '옥외 주차장',
     coords: '0,2,290,220',
@@ -258,6 +291,7 @@ const mapF2 = [
 const mapF3 = [
   {
     target: '음악 자료존',
+    floor: '3',
     serial: '',
     title: '음악 자료존',
     coords: '2,223,182,284',
@@ -265,6 +299,7 @@ const mapF3 = [
   },
   {
     target: '컴퓨터존',
+    floor: '3',
     serial: '',
     title: '컴퓨터존',
     coords: '-1,284,64,398',
@@ -272,6 +307,7 @@ const mapF3 = [
   },
   {
     target: '영상 자료존',
+    floor: '3',
     serial: '',
     title: '영상 자료존',
     coords: '64,285,124,398',
@@ -279,6 +315,7 @@ const mapF3 = [
   },
   {
     target: '정기 간행물존',
+    floor: '3',
     serial: '',
     title: '정기 간행물존',
     coords: '123,284,168,334',
@@ -286,6 +323,7 @@ const mapF3 = [
   },
   {
     target: '사서실',
+    floor: '3',
     serial: 'V01G1613636',
     title: '사서실',
     coords: '125,336,185,399',
@@ -293,6 +331,7 @@ const mapF3 = [
   },
   {
     target: '상호 대차 준비실',
+    floor: '3',
     serial: 'V01G1613630',
     title: '상호 대차 준비실',
     coords: '182,222,183,247,237,253,237,222',
@@ -300,6 +339,7 @@ const mapF3 = [
   },
   {
     target: '자료 정리실',
+    floor: '3',
     serial: 'V01G1613631',
     title: '자료 정리실',
     coords: '292,81,344,151',
@@ -307,6 +347,7 @@ const mapF3 = [
   },
   {
     target: '자료 열람실 I',
+    floor: '3',
     serial: 'V01G1613539',
     title: '자료 열람실 I',
     coords:
