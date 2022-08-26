@@ -112,8 +112,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data () {
     return {
@@ -151,14 +149,14 @@ export default {
   created () {
     this.floorDataList = this.$store.state.floorDataList
     // 데이터 일회성 초기 할당
-    axios.get('https://api.openweathermap.org/data/2.5/weather?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069&units=metric')
+    this.$apiGet('https://api.openweathermap.org/data/2.5/weather?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069&units=metric')
       .then((response) => {
         this.weatherStatus = response.data.weather[0].description
         this.weatherData[0] = response.data.main
       }).catch((err) => {
         console.log(err)
       })
-    axios.get('http://api.openweathermap.org/data/2.5/air_pollution?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069')
+    this.$apiGet('http://api.openweathermap.org/data/2.5/air_pollution?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069')
       .then((response) => {
         this.weatherData[1] = response.data.list[0].components
       }).catch((err) => {
@@ -187,7 +185,7 @@ export default {
   mounted () {
     // 데이터 n초마다 받아오는 부분(실시간 업데이트 처리)
     this.weatherInterval = setInterval(() => {
-      axios.get('https://api.openweathermap.org/data/2.5/weather?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069&units=metric')
+      this.$apiGet('https://api.openweathermap.org/data/2.5/weather?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069&units=metric')
         .then((response) => {
           this.weatherStatus = response.data.weather[0].description
           this.weatherData[0] = response.data.main
@@ -196,7 +194,7 @@ export default {
         })
     }, 60000)
     this.airInterval = setInterval(() => {
-      axios.get('http://api.openweathermap.org/data/2.5/air_pollution?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069')
+      this.$apiGet('http://api.openweathermap.org/data/2.5/air_pollution?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069')
         .then((response) => {
           this.weatherData[1] = response.data.list[0].components
         }).catch((err) => {

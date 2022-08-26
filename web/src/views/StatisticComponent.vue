@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="row g-3 pt-4">
-          <div class="col-lg-4 col-md-6">
+          <div class="col-md-6">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title mt-3 ms-2 text-start">실내 소음(dB)</h5>
@@ -25,7 +25,7 @@
               <VueApexCharts :options="noiseDataSet.chartOptions" :series="noiseDataSet.series"></VueApexCharts>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6">
+          <div class="col-md-6">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title mt-3 ms-2 text-start">주차장</h5>
@@ -33,7 +33,7 @@
               <VueApexCharts :options="parkDataSet.chartOptions" :series="parkDataSet.series"></VueApexCharts>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6">
+          <div class="col-md-6">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title mt-3 ms-2 text-start">실내 온도(℃)</h5>
@@ -41,7 +41,7 @@
               <VueApexCharts :options="tempDataSet.chartOptions" :series="tempDataSet.series"></VueApexCharts>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6">
+          <div class="col-md-6">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title mt-3 ms-2 text-start">실내 습도(%)</h5>
@@ -49,7 +49,7 @@
               <VueApexCharts :options="humDataSet.chartOptions" :series="humDataSet.series"></VueApexCharts>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6">
+          <div class="col-md-6">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title mt-3 ms-2 text-start">실내 미세먼지(PM10)</h5>
@@ -57,7 +57,7 @@
               <VueApexCharts :options="PM_10_DataSet.chartOptions" :series="PM_10_DataSet.series"></VueApexCharts>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6">
+          <div class="col-md-6">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title mt-3 ms-2 text-start">실내 초미세먼지(PM2.5)</h5>
@@ -65,7 +65,7 @@
               <VueApexCharts :options="PM_2_5_DataSet.chartOptions" :series="PM_2_5_DataSet.series"></VueApexCharts>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6">
+          <div class="col-md-6">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title mt-3">샘플 Column 차트</h5>
@@ -802,6 +802,9 @@ export default {
     },
     updateChart () {
       this.stackedSeries = this.dataSeries
+    },
+    goToDetail () {
+      this.$router.push({ path: '/detail' })
     }
   },
   name: 'App',

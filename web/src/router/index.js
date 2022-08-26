@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MainComponent from '../views/MainComponent.vue'
 import InnerComponent from '../views/InnerComponent.vue'
 import StatisticComponent from '../views/StatisticComponent.vue'
+import DetailComponent from '../views/DetailComponent.vue'
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/statistic',
     name: 'StatisticComponent',
     component: StatisticComponent
+  },
+  {
+    path: '/detail',
+    name: 'DetailComponent',
+    component: DetailComponent
   }
 ]
 
