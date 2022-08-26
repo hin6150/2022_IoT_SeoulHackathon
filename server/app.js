@@ -20,12 +20,26 @@ MongoClient.connect(url, options, function(err, db) {
     if (err) throw err;
     // TotalParking(dbo.collection("parking").find());
     lastParkData = result;
+    // db.close();
+  });
+
+  dbo.collection("InnerComponentData").find({}, { projection: { _id: 0, No: 0} }).sort({"serial": 1}).toArray(function(err, result) {
+    
+    if (err) throw err;
+    
+    // console.log(result);
+    database = result;
     db.close();
+
   });
 });
 
 app.get('/api', (req, res) => {
   res.send(lastParkData);
+})
+
+app.get('/api/floor', (req, res) => {
+  res.send(database);
 })
 
 app.post('/api/calendar', (request, response) => {
