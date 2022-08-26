@@ -124,19 +124,19 @@ export default {
       // 임시 주차데이터 리스트
       parkInfoList: [
         {
-          floor: 'F1',
+          floor: '2F',
           total_park: 120,
           enable_park: 96,
           unable_park: 22
         },
         {
-          floor: 'B1',
+          floor: '1F',
           total_park: 50,
           enable_park: 45,
           unable_park: 5
         },
         {
-          floor: 'B2',
+          floor: 'B1',
           total_park: 50,
           enable_park: 34,
           unable_park: 16
@@ -161,6 +161,16 @@ export default {
         this.weatherData[1] = response.data.list[0].components
       }).catch((err) => {
         console.log(err)
+      })
+    // 메인 페이지 주차장 초기화
+    this.$apiGet('/api')
+      .then((response) => {
+        for (let i = 0; i < response.data.length; i++) {
+          this.parkInfoList[i].total_park = response.data[i].TotalParkingLot
+          this.parkInfoList[i].enable_park = response.data[i].availableparking
+          this.parkInfoList[i].unable_park = response.data[i].emptyparking
+        }
+        console.log(response.data)
       })
   },
   methods: {
