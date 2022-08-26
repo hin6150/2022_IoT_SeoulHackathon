@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main style="background-color: #556cff">
+    <main style="background-color: #556cff; text-align: center">
       <div class="container pb-4 pt-5">
         <div class="row mb-2">
           <h4 style="color: white; font-weight: bold">
@@ -122,8 +122,7 @@ export default {
         }
       }
       console.log('floorData: ')
-      console.log(this.floorData[6].length)
-      console.log(this.floorData[6][1])
+      console.log(this.floorData)
     })
   },
   name: 'App',

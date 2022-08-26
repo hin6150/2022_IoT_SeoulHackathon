@@ -77,7 +77,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6 ps-md-4" style="background-color: 73b3ef">
+            <div class="col-md-6 ps-md-4" style="text-align: center">
               <p style="color: white; font-weight: bold">야외데이터</p>
               <div
                 class="col rounded-4"
@@ -116,7 +116,7 @@
                 <table class="table table-borderless">
                   <thead>
                     <tr>
-                      <th scope="col">이미지임</th>
+                      <th scope="col"></th>
                       <th scope="col">주차장 총 구역</th>
                       <th scope="col">주차 가능 구역</th>
                       <th scope="col">주차 불가능 구역</th>
@@ -146,7 +146,7 @@
           </div>
           <div class="col-md-5 offset-md-1 col-sm-6 align-self-center">
             <form class="pt-1">
-              <h4 style="font-weight: bold">통계 데이터</h4>
+              <h4>통계 데이터</h4>
               <hr />
               <div style="text-align: left">
                 <p>모든 데이터를 통계로 보세요</p>
