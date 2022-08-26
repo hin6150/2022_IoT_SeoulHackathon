@@ -1,7 +1,7 @@
 <template>
 <div>
   <VueApexCharts :type="type" :options="chartOptions" :series="series"></VueApexCharts>
-  <button>hi</button>
+  <button>ih</button>
 </div>
 </template>
 
