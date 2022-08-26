@@ -219,25 +219,85 @@ const mapF3 = [
   }
 ]
 const mapF4 = [
-  { target: '', alt: '1', title: '1', coords: '-1,219,64,286', shape: 'rect' },
-  { target: '', alt: '2', title: '2', coords: '66,222,96,286', shape: '0' },
-  { target: '', alt: '3', title: '3', coords: '95,223,122,285', shape: '0' },
-  { target: '', alt: '4', title: '4', coords: '123,222,163,286', shape: '0' },
   {
-    target: '',
+    target: '마포 인재육성 장학재단',
+    alt: '1',
+    title: '1',
+    coords: '-1,219,64,286',
+    shape: 'rect'
+  },
+  {
+    target: '문화 강연방1',
+    alt: '2',
+    title: '2',
+    coords: '66,222,96,286',
+    shape: '0'
+  },
+  {
+    target: '공단 사무실',
+    alt: '3',
+    title: '3',
+    coords: '95,223,122,285',
+    shape: '0'
+  },
+  {
+    target: '자원 봉사자실',
+    alt: '4',
+    title: '4',
+    coords: '123,222,163,286',
+    shape: '0'
+  },
+  {
+    target: '서비스 지원실',
     alt: '5',
     title: '5',
     coords: '183,222,182,247,242,256,242,221',
     shape: 'poly'
   },
-  { target: '', alt: '6', title: '6', coords: '1,307,67,352', shape: '0' },
-  { target: '', alt: '7', title: '7', coords: '0,352,64,399', shape: '0' },
-  { target: '', alt: '8', title: '8', coords: '64,304,185,398', shape: '0' },
-  { target: '', alt: '9', title: '9', coords: '356,2,423,48', shape: '0' },
-  { target: '', alt: '10', title: '10', coords: '355,46,422,85', shape: '0' },
-  { target: '', alt: '11', title: '11', coords: '354,84,422,121', shape: '0' },
   {
-    target: '',
+    target: '문화 강연방2',
+    alt: '6',
+    title: '6',
+    coords: '1,307,67,352',
+    shape: '0'
+  },
+  {
+    target: '관장실',
+    alt: '7',
+    title: '7',
+    coords: '0,352,64,399',
+    shape: '0'
+  },
+  {
+    target: '도서관 사무실',
+    alt: '8',
+    title: '8',
+    coords: '64,304,185,398',
+    shape: '0'
+  },
+  {
+    target: '전산실',
+    alt: '9',
+    title: '9',
+    coords: '356,2,423,48',
+    shape: '0'
+  },
+  {
+    target: '생각나눔방1',
+    alt: '10',
+    title: '10',
+    coords: '355,46,422,85',
+    shape: '0'
+  },
+  {
+    target: '생각나눔방2',
+    alt: '11',
+    title: '11',
+    coords: '354,84,422,121',
+    shape: '0'
+  },
+  {
+    target: '자료열람실 II',
     alt: '12',
     title: '12',
     coords:
@@ -245,7 +305,7 @@ const mapF4 = [
     shape: 'poly'
   },
   {
-    target: '',
+    target: '장애인 열람석',
     alt: '13',
     title: '13',
     coords: '292,284,318,324,351,323,351,285',
