@@ -101,7 +101,6 @@ export default {
     this.dataChartName = this.$store.state.dataChartName
     // Calendar 선택 날짜 -> 형식 : 'yyyymmdd'
     this.getPostSendDate()
-    console.log(this.date[0])
   },
   mounted () {
   },
@@ -148,13 +147,16 @@ export default {
           this.monthNum[i] = '0' + this.monthNum[i]
         }
         this.postDate[i] += (String(splitStr[3]) + this.monthNum[i] + String(splitStr[2]))
-        console.log(this.postDate[i])
       }
     },
     handleDate (modelData) {
       this.date = modelData
-      console.log(this.date)
       // axios changed data and update chart
+      this.$apiPost('/api/calendar', { param: this.postDate })
+        .then((response) => {
+          console.log('post then')
+          console.log(response)
+        })
     },
     goToDetail (typeNum) {
       this.$router.push({
