@@ -39,7 +39,7 @@ MongoClient.connect(url, options, function (err, db) {
 
   dbo
     .collection("InnerComponentData")
-    .find({}, { projection: { _id: 0, No: 0 } })
+    .find({}, { projection: { _id: 0, No: 0, observationtime: 0 } })
     .sort({ serial: 1 })
     .toArray(function (err, result) {
       if (err) throw err;
