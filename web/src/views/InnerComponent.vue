@@ -124,6 +124,7 @@ export default {
         }
       }
     })
+    console.log(this.floorData)
   },
   name: 'App',
   components: { InnerBlueprintComponent, Splide, SplideSlide },
