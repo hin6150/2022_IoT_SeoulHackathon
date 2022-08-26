@@ -35,7 +35,6 @@
                     <div v-if="check.Serial == active.serial">
                       {{ check[data] }}
                     </div>
-                    <div v-else-if="check.Serial === ''">센서정보없음</div>
                   </div>
                 </td>
               </tr>
