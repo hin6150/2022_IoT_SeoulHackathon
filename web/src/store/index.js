@@ -8,35 +8,60 @@ export default createStore({
         value: '6F',
         facilities: ['수유실', '사서실', '집중회의실'],
         facilityInfoString: '6층 센서 위치 : 수유실, 사서실, 집중회의실',
-        sensorInfoString: '6층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
+        sensorInfoString:
+          '6층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
       },
       {
         floorNumber: 5,
         value: '5F',
-        facilities: ['피아노 연주실', '악기 연주실', '무용연기실', '연기연습실', '음악 개인연습실', '문화강연방', '생각나눔방', '상호대처실', '자료정리실', '유아자료실', '꿈나래방'],
-        facilityInfoString: '5층 센서 위치 : 피아노 연주실, 악기 연주실, 무용연기실, 연기연기실, 음악 개인연습실, 문화강연방, 생각나눔방, 상호대처실, 자료정리실, 유아자료실, 꿈나래방',
-        sensorInfoString: '5층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
+        facilities: [
+          '피아노 연주실',
+          '악기 연주실',
+          '무용연기실',
+          '연기연습실',
+          '음악 개인연습실',
+          '문화강연방',
+          '생각나눔방',
+          '상호대처실',
+          '자료정리실',
+          '유아자료실',
+          '꿈나래방'
+        ],
+        facilityInfoString:
+          '5층 센서 위치 : 피아노 연주실, 악기 연주실, 무용연기실, 연기연기실, 음악 개인연습실, 문화강연방, 생각나눔방, 상호대처실, 자료정리실, 유아자료실, 꿈나래방',
+        sensorInfoString:
+          '5층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
       },
       {
         floorNumber: 4,
         value: '4F',
         facilities: ['작가 집필실', '피아노 연주실'],
         facilityInfoString: '4층 센서 위치 : 작가 집필실, 피아노 연주실',
-        sensorInfoString: '4층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
+        sensorInfoString:
+          '4층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
       },
       {
         floorNumber: 3,
         value: '3F',
         facilities: ['마중홀', '세미나홀', '근린상가시설', '작가 집필실'],
-        facilityInfoString: '3층 센서 위치 : 마중홀 우측 구역, 세미나홀, 근린상가시설, 작가 집필실',
-        sensorInfoString: '3층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
+        facilityInfoString:
+          '3층 센서 위치 : 마중홀 우측 구역, 세미나홀, 근린상가시설, 작가 집필실',
+        sensorInfoString:
+          '3층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
       },
       {
         floorNumber: 2,
         value: '2F',
-        facilities: ['어린이 자료열람실 B', '자료 열람실 I', '열람석', '마중홀'],
-        facilityInfoString: '2층 센서 위치 : 어린이 자료열람실 B, 자료 열람실 I, 열람석, 마중홀 좌측 구역',
-        sensorInfoString: '2층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
+        facilities: [
+          '어린이 자료열람실 B',
+          '자료 열람실 I',
+          '열람석',
+          '마중홀'
+        ],
+        facilityInfoString:
+          '2층 센서 위치 : 어린이 자료열람실 B, 자료 열람실 I, 열람석, 마중홀 좌측 구역',
+        sensorInfoString:
+          '2층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
       },
       {
         floorNumber: 1,
@@ -50,7 +75,8 @@ export default createStore({
         value: 'B1',
         facilities: ['어린이 자료열람실 A'],
         facilityInfoString: '지하 1층 센서 위치 : 어린이 자료열람실 A',
-        sensorInfoString: '지하 1층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
+        sensorInfoString:
+          '지하 1층 센서 정보 : 온도, 습도, 소음, 미세먼지, 초미세먼지'
       }
     ],
     iotDataArray: [
@@ -132,16 +158,18 @@ export default createStore({
               enabled: true
             }
           },
-          responsive: [{
-            breakpoint: 480,
-            options: {
-              legend: {
-                position: 'bottom',
-                offsetX: -10,
-                offsetY: 0
+          responsive: [
+            {
+              breakpoint: 480,
+              options: {
+                legend: {
+                  position: 'bottom',
+                  offsetX: -10,
+                  offsetY: 0
+                }
               }
             }
-          }],
+          ],
           plotOptions: {
             bar: {
               horizontal: true,
@@ -464,18 +492,22 @@ export default createStore({
               horizontal: true
             }
           },
-          colors: [function ({ value, seriesIndex, w }) {
-            if (value <= 30) {
-              return '#4dd64f'
-            } else if (value > 30 && value <= 80) {
-              return '#cfcf48'
-            } else {
-              return '#c92a2a'
+          colors: [
+            function ({ value, seriesIndex, w }) {
+              if (value <= 30) {
+                return '#4dd64f'
+              } else if (value > 30 && value <= 80) {
+                return '#ffd248'
+              } else {
+                return '#ff2d2d'
+              }
             }
-          }],
+          ],
           dataLabels: {
             formatter: function (val, opt) {
-              const goals = opt.w.config.series[opt.seriesIndex].data[opt.dataPointIndex].goals
+              const goals =
+                opt.w.config.series[opt.seriesIndex].data[opt.dataPointIndex]
+                  .goals
               if (goals && goals.length) {
                 return `${val}㎍`
               }
@@ -667,18 +699,22 @@ export default createStore({
               horizontal: true
             }
           },
-          colors: [function ({ value, seriesIndex, w }) {
-            if (value <= 15) {
-              return '#4dd64f'
-            } else if (value > 15 && value <= 35) {
-              return '#cfcf48'
-            } else {
-              return '#c92a2a'
+          colors: [
+            function ({ value, seriesIndex, w }) {
+              if (value <= 15) {
+                return '#4dd64f'
+              } else if (value > 15 && value <= 35) {
+                return '#ffd248'
+              } else {
+                return '#ff2d2d'
+              }
             }
-          }],
+          ],
           dataLabels: {
             formatter: function (val, opt) {
-              const goals = opt.w.config.series[opt.seriesIndex].data[opt.dataPointIndex].goals
+              const goals =
+                opt.w.config.series[opt.seriesIndex].data[opt.dataPointIndex]
+                  .goals
               if (goals && goals.length) {
                 return `${val}㎍`
               }
@@ -700,12 +736,10 @@ export default createStore({
       '실내 초미세먼지(PM2.5)'
     ]
   },
-  getters: { // 중복되는 computed 메소드 통합 사용
+  getters: {
+    // 중복되는 computed 메소드 통합 사용
   },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+  mutations: {},
+  actions: {},
+  modules: {}
 })
