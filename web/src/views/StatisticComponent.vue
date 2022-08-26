@@ -90,24 +90,67 @@ export default {
         {}, // pm10
         {} // pm2.5
       ],
-      postDate: []
+      postDate: ['', ''],
+      monthNum: [0, 0]
     }
   },
   created () {
     // 출력 기간 기본값(7일)
-    const date = new Date()
-    const startDate = new Date(new Date().setDate(date.getDate() - 9))
-    const endDate = new Date(new Date().setDate(date.getDate() - 2))
-    this.date = [startDate, endDate]
+    this.setupDefaultDate()
     this.dataChartArray = this.$store.state.iotDataArray
     this.dataChartName = this.$store.state.dataChartName
+    // Calendar 선택 날짜 -> 형식 : 'yyyymmdd'
+    this.getPostSendDate()
     console.log(this.date[0])
-    this.postDate = String(this.date[0]).split(' ')[1]
-    console.log(this.postDate)
   },
   mounted () {
   },
   methods: {
+    setupDefaultDate () {
+      const date = new Date()
+      const startDate = new Date(new Date().setDate(date.getDate() - 9))
+      const endDate = new Date(new Date().setDate(date.getDate() - 2))
+      this.date = [startDate, endDate]
+    },
+    getMonthNumber (str) {
+      switch (str) {
+        case 'Jan':
+          return 1
+        case 'Feb':
+          return 2
+        case 'Mar':
+          return 3
+        case 'Apr':
+          return 4
+        case 'May':
+          return 5
+        case 'Jun':
+          return 6
+        case 'Jul':
+          return 7
+        case 'Aug':
+          return 8
+        case 'Sep':
+          return 9
+        case 'Oct':
+          return 10
+        case 'Nov':
+          return 11
+        case 'Dec':
+          return 12
+      }
+    },
+    getPostSendDate () {
+      for (let i = 0; i < 2; i++) {
+        const splitStr = String(this.date[i]).split(' ')
+        this.monthNum[i] = this.getMonthNumber(splitStr[1])
+        if (this.monthNum[i] < 10) {
+          this.monthNum[i] = '0' + this.monthNum[i]
+        }
+        this.postDate[i] += (String(splitStr[3]) + this.monthNum[i] + String(splitStr[2]))
+        console.log(this.postDate[i])
+      }
+    },
     handleDate (modelData) {
       this.date = modelData
       console.log(this.date)
