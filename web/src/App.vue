@@ -19,6 +19,9 @@
             <li class="nav-item me-2">
               <router-link class="nav-link" to="/statistic">통계데이터</router-link>
             </li>
+            <li class="nav-item me-2">
+              <a @click="goToDetail" class="nav-link" to="/detail">상세데이터</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -53,6 +56,12 @@ export default {
     },
     goToStatistic () {
       this.$router.push({ path: '/statistic' })
+    },
+    goToDetail () {
+      this.$router.push({
+        path: '/detail',
+        query: { dataType: 0 }
+      })
     }
   }
 }

@@ -21,8 +21,8 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          {{ floor.floorFacilityData }}<br>
-                          {{ floor.floorSensorData }}
+                          {{ floor.facilityInfoString }}<br>
+                          {{ floor.sensorInfoString }}
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-primary" @click="goToInner(floor.floorNumber)">이동하기</button>
@@ -147,8 +147,8 @@ export default {
     }
   },
   created () {
-    this.floorDataList = this.$store.state.floorDataList
     // 데이터 일회성 초기 할당
+    this.floorDataList = this.$store.state.floorDataList
     this.$apiGet('https://api.openweathermap.org/data/2.5/weather?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069&units=metric')
       .then((response) => {
         this.weatherStatus = response.data.weather[0].description
