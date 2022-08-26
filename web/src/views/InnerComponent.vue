@@ -1,11 +1,9 @@
 <template>
   <div>
-    <main style="background-color: #556cff">
+    <main>
       <div class="container py-5">
         <div class="row mb-4">
-          <h4 style="color: white; font-weight: bold">
-            기관(마포중앙도서관) 실내데이터
-          </h4>
+          <h4>기관(마포중앙도서관) 실내데이터</h4>
         </div>
       </div>
       <Splide :options="{ rewind: true, start: this.floor }">
