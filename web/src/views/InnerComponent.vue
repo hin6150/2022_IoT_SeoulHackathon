@@ -8,7 +8,10 @@
           </h4>
         </div>
       </div>
-      <Splide :options="{ rewind: true, start: this.floor }">
+      <Splide
+        @splide:moved="onMoved"
+        :options="{ rewind: true, start: this.floor }"
+      >
         <SplideSlide v-for="i in 7" :key="i">
           <InnerBlueprintComponent
             :propFloor="i - 1"
@@ -18,39 +21,32 @@
       </Splide>
     </main>
     <hr />
-    <main class="mt-3" style="background-color: white">
-      <div class="container">
-        <div class="mb-4" v-for="active in activeRoom" :key="active">
-          <h4 class="mb-3" style="text-align: left">{{ active.target }}</h4>
-          <div v-if="active.serial != ''">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th
-                    style="font-size: 7px"
-                    scope="col"
-                    v-for="data in chartData"
-                    :key="data"
-                  >
-                    {{ data }}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td v-for="data in chartData" :key="data">
-                    <div v-for="check in floorData[active.floor]" :key="check">
-                      <div v-if="check.Serial == active.serial">
-                        {{ check[data] }}
-                      </div>
+    <main style="background-color: white">
+      <div class="mb-4" v-for="active in activeRoom" :key="active">
+        <h4 class="mb-3" style="text-allign: left">{{ active.target }}</h4>
+        <div v-if="active.serial != ''">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" v-for="data in chartData" :key="data">
+                  {{ data }}
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td v-for="data in chartData" :key="data">
+                  <div v-for="check in floorData[active.floor]" :key="check">
+                    <div v-if="check.Serial == active.serial">
+                      {{ check[data] }}{{ unitData[data] }}
                     </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div v-else>센서 정보 없음</div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <div v-else>센서 정보 없음</div>
       </div>
     </main>
   </div>
@@ -70,17 +66,21 @@ export default {
       chartLength: 0,
       axiosFloorData: [],
       floorData: [[], [], [], [], [], [], []],
-      chartData: [
-        'temperature',
-        'humid',
-        'finedust',
-        'ultrafinedust',
-        'noise',
-        'co2'
-      ]
+      chartData: ['temperature', 'humid', 'finedust', 'ultrafinedust', 'noise'],
+      unitData: {
+        temperature: '℃',
+        humid: '%',
+        finedust: '㎍/㎥',
+        ultrafinedust: '㎍/㎥',
+        noise: '㏈'
+      }
     }
   },
   methods: {
+    onMoved() {
+      this.activeRoom.splice(0, this.activeRoom.length)
+      this.chartLength = 0
+    },
     roomClicked(e) {
       let check = true
       for (let i = 0; i < this.chartLength; i++) {
@@ -101,6 +101,8 @@ export default {
     this.$apiGet('/api/floor').then((response) => {
       this.axiosFloorData = response.data
       for (const data of this.axiosFloorData) {
+        data.temperature = parseInt((data.temperature / 10 - 100) * 10) / 10
+
         if (parseInt(data.floor) === -1) {
           // 지하 1층
           this.floorData[0].push(data)
@@ -121,9 +123,8 @@ export default {
           this.floorData[6].push(data)
         }
       }
-      console.log('floorData: ')
-      console.log(this.floorData)
     })
+    console.log(this.floorData)
   },
   name: 'App',
   components: { InnerBlueprintComponent, Splide, SplideSlide },

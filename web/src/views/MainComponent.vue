@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main style="background-color: #556cff">
+    <main style="background-color: #556cff; text-align: center">
       <div class="container py-4">
         <div class="row mb-3">
           <h4 style="color: white; font-weight: bold">
