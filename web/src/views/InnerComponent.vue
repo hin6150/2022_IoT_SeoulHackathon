@@ -21,32 +21,34 @@
       </Splide>
     </main>
     <hr />
-    <main style="background-color: white">
-      <div class="mb-4" v-for="active in activeRoom" :key="active">
-        <h4 class="mb-3" style="text-allign: left">{{ active.target }}</h4>
-        <div v-if="active.serial != ''">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" v-for="data in chartData" :key="data">
-                  {{ data }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td v-for="data in chartData" :key="data">
-                  <div v-for="check in floorData[active.floor]" :key="check">
-                    <div v-if="check.Serial == active.serial">
-                      {{ check[data] }}{{ unitData[data] }}
+    <main class="px-3" style="background-color: white; font-size: 6px">
+      <div class="component">
+        <div class="mb-4" v-for="active in activeRoom" :key="active">
+          <h5 class="mb-3" style="text-allign: left">{{ active.target }}</h5>
+          <div v-if="active.serial != ''">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" v-for="data in chartData" :key="data">
+                    {{ data }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td v-for="data in chartData" :key="data">
+                    <div v-for="check in floorData[active.floor]" :key="check">
+                      <div v-if="check.Serial == active.serial">
+                        {{ check[data] }}{{ unitData[data] }}
+                      </div>
                     </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div v-else>센서 정보 없음</div>
         </div>
-        <div v-else>센서 정보 없음</div>
       </div>
     </main>
   </div>
