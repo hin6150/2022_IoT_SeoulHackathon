@@ -102,7 +102,13 @@ export default {
       this.axiosFloorData = response.data
       for (const data of this.axiosFloorData) {
         data.temperature = parseInt((data.temperature / 10 - 100) * 10) / 10
-
+        if (data.noise === '999' && data.humid === '999') {
+          data.humid = 'null '
+          data.noise = 'null '
+          data.temperature = 'null '
+          data.ultrafinedust = 'null '
+          data.finedust = 'null '
+        }
         if (parseInt(data.floor) === -1) {
           // 지하 1층
           this.floorData[0].push(data)
