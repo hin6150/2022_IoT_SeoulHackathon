@@ -10,7 +10,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <p class="text-start fs-6">출력 데이터 기간</p>
+            <p class="text-start fs-6">출력 기간</p>
             <div class="col col-md-5">
               <Datepicker
                 v-model="date_first"
