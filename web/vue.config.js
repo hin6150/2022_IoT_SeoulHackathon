@@ -4,7 +4,7 @@ module.exports = defineConfig({
 })
 
 // node.js server 포트번호 3000 -> 향후 서버 url을 넣어주면 될듯
-const target = 'http://127.0.0.1:3000';
+const target = 'http://127.0.0.1:3000'
 
 module.exports = {
   devServer: {

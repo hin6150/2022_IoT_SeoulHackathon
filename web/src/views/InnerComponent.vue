@@ -3,20 +3,12 @@
     <main style="background-color: #556cff; text-align: center">
       <div class="container pb-4 pt-5">
         <div class="row mb-2">
-          <h4 style="color: white; font-weight: bold">
-            기관(마포중앙도서관) 실내데이터
-          </h4>
+          <h4 style="color: white; font-weight: bold">기관(마포중앙도서관) 실내데이터</h4>
         </div>
       </div>
-      <Splide
-        @splide:moved="onMoved"
-        :options="{ rewind: true, start: this.floor }"
-      >
+      <Splide @splide:moved="onMoved" :options="{ rewind: true, start: this.floor }">
         <SplideSlide v-for="i in 7" :key="i">
-          <InnerBlueprintComponent
-            :propFloor="i - 1"
-            v-on:childEvent="roomClicked"
-          />
+          <InnerBlueprintComponent :propFloor="i - 1" v-on:childEvent="roomClicked" />
         </SplideSlide>
       </Splide>
     </main>
