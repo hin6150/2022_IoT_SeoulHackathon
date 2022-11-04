@@ -20,7 +20,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse ms-1" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+          <ul class="navbar-nav me-auto mb-2 mb-sm-0" style="text-align: center; font-weight: bold">
             <li class="nav-item me-2">
               <router-link class="nav-link" to="/">Home</router-link>
             </li>
@@ -35,19 +35,14 @@
               </a>
             </li>
             <li class="nav-item me-2">
-              <router-link class="nav-link" to="/statistic"
-                >통계데이터</router-link
-              >
+              <router-link class="nav-link" to="/statistic">
+                통계데이터
+              </router-link>
             </li>
             <li class="nav-item me-2">
-              <a
-                @click="goToDetail"
-                class="nav-link"
-                to="/detail"
-                style="cursor: pointer"
-              >
+              <router-link class="nav-link" @click="goToDetail()" to="/detail">
                 상세데이터
-              </a>
+              </router-link>
             </li>
           </ul>
         </div>

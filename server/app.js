@@ -3,16 +3,6 @@ const fs = require('fs') // 디렉토리 접근 모듈
 const app = express();
 const port = 3000;
 
-app.use(session({
-  secret: 'secret code', // 세션에 대한 키
-  resave: false, // 리퀘스트 요청에 대해 세션 수정사항이 없더라도 다시 저장하는지 여부
-  saveUninitialized: false, // 세션에 저장할 내역이 없더라도 세션을 재저장하는지
-  cookie: {
-    secure: false,
-    maxAge: 1000 * 60 * 60 // 쿠키 유효시간 1시간
-  }
-}))
-
 app.use(
   express.json({
     limit: "50mb",

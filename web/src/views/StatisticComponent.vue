@@ -18,9 +18,11 @@
         </div>
         <div class="row g-3 pt-4">
           <div class="col-md-6" :key="i" v-for="(data, i) in dataChartArray">
-            <div class="card" @click="goToDetail(i)">
+            <div class="card">
               <div class="card-body">
-                <h5 class="card-title mt-3 ms-2 text-start">{{ dataChartName[i] }}</h5>
+                <h5 class="card-title mt-3 ms-2 text-start" style="cursor: pointer" @click="goToDetail(i)">
+                  {{ dataChartName[i] }}
+                </h5>
               </div>
               <VueApexCharts :options="data.chartOptions" :series="data.series"></VueApexCharts>
             </div>
