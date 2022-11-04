@@ -43,13 +43,18 @@ export default {
   emits: ['childEvent'],
   data() {
     return {
-      floor: 0, // 현재 보여줄 층 번호
+      // 현재 보여줄 층 번호
+      floor: 0,
+      // 현재 마우스가 위치한 방 출력
       sampleData: '시설을 클릭해주세요',
       imgSrc: '',
       mapSrc: [],
       width: 0,
+      // map + floor
       mapId: '',
+      // img + floor
       imgId: '',
+      // # + mapId
       useMap: ''
     }
   },
@@ -63,16 +68,20 @@ export default {
       this.imgId = 'img' + this.floor
       this.useMap = '#' + this.mapId
     },
+    // Mouse Over
     over(title) {
       this.sampleData = title
     },
+    // Mouse Out
     out() {
       this.sampleData = '시설을 클릭해주세요'
     },
+    // Clicked
     roomClicked(title) {
       this.$emit('childEvent', title)
     },
     /* eslint-disable one-var */
+    // 이미지의 크기변화에 따라 Map의 좌표값 변환
     imgResize() {
       let previousWidth = this.width
       const ImageMap = function (map, img) {

@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col">
             <p class="text-start fs-6">출력 데이터 기간</p>
-            <div class="col col-md-5">
+            <div class="col col-md-6">
               <Datepicker v-model="date" range @update:modelValue="handleDate"/>
             </div>
           </div>
@@ -20,7 +20,7 @@
           <div class="col-md-6" :key="i" v-for="(data, i) in dataChartArray">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title mt-3 ms-2 text-start" style="cursor: pointer" @click="goToDetail(i)">
+                <h5 class="card-title mt-3 ms-2 text-start" style="cursor: pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="클릭 시 상세페이지로 이동" @click="goToDetail(i)">
                   {{ dataChartName[i] }}
                 </h5>
               </div>
@@ -93,7 +93,8 @@ export default {
         {} // pm2.5
       ],
       postDate: ['', ''],
-      monthNum: [0, 0]
+      monthNum: [0, 0],
+      upHere: false
     }
   },
   created () {
