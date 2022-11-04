@@ -1,7 +1,7 @@
 # web
 
 ## 확장프로그램
-Ctrl + <Shift> + x > 확장프로그램 단축키
+Ctrl + Shift + x > 확장프로그램 단축키
 확장 프로그램 vetur 설치
 
 ## node.js
