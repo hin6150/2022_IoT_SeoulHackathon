@@ -26,8 +26,14 @@
       <div class="container">
         <div class="mb-4" v-for="active in activeRoom" :key="active">
           <div class="row">
-            <h4 class="align-self-baseline col-auto me-auto p-2 fw-bold">{{ active.target }}</h4>
-            <button type="button" class="align-self-baseline col-auto btn btn-outline-danger" @click="btnDelete(active.target)">
+            <h4 class="align-self-baseline col-auto me-auto p-2 fw-bold">
+              {{ active.target }}
+            </h4>
+            <button
+              type="button"
+              class="align-self-baseline col-auto btn btn-outline-danger"
+              @click="btnDelete(active.target)"
+            >
               삭제
             </button>
           </div>
@@ -39,7 +45,9 @@
               <thead>
                 <tr>
                   <th scope="col" v-for="data in chartData" :key="data">
-                    <p class="text-capitalize text-start fs-6 fw-normal">{{ data }}</p>
+                    <p class="text-capitalize text-start fs-6 fw-normal">
+                      {{ data }}
+                    </p>
                   </th>
                 </tr>
               </thead>
@@ -49,7 +57,9 @@
                   <td v-for="data in chartData" :key="data">
                     <div v-for="check in floorData[active.floor]" :key="check">
                       <div v-if="check.Serial == active.serial">
-                        <p class="text-start fs-6"> {{ check[data] }}{{ unitData[data] }} </p>
+                        <p class="text-start fs-6">
+                          {{ check[data] }}{{ unitData[data] }}
+                        </p>
                       </div>
                     </div>
                   </td>
@@ -59,7 +69,7 @@
           </div>
           <div v-else>
             <p class="text-start fs-6">센서 정보 없음</p>
-            <hr>
+            <hr />
           </div>
         </div>
       </div>
@@ -174,5 +184,9 @@ export default {
 </script>
 
 <style scoped>
-  .h-container:after{ clear: both; display: block; content: '' }
+.h-container:after {
+  clear: both;
+  display: block;
+  content: '';
+}
 </style>
