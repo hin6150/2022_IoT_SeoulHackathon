@@ -13,15 +13,10 @@
             <p class="text-start fs-6">출력 기간</p>
             <div class="col col-md-5">
               <Datepicker
-                v-model="date_first"
+                class='mb-2'
+                v-model="date"
                 range
-                @update:modelValue="handleDate_first"
-              />
-              <Datepicker
-                v-if="dataType !== 4 && dataType !== 5"
-                v-model="date_second"
-                range
-                @update:modelValue="handleDate_second"
+                @update:modelValue="handleDate"
               />
             </div>
           </div>
@@ -54,8 +49,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 export default {
   data() {
     return {
-      date_first: null,
-      date_second: null,
+      date: null,
       dataType: 0,
       dataChartArray: [
         {}, // noise
@@ -76,30 +70,23 @@ export default {
     this.dataChartName = this.$store.state.dataChartName
     this.floorDataList = this.$store.state.floorDataList
   },
+  mounted () {
+    this.setupDefaultDate()
+  },
   methods: {
-    handleDate_first(modelData) {
-      this.date_first = modelData
-      console.log(this.date_first)
+    setupDefaultDate () {
+      const date = new Date()
+      const startDate = new Date(new Date().setDate(date.getDate() - 1))
+      const endDate = new Date(new Date().setDate(date.getDate() - 8))
+      this.date = [endDate, startDate]
+    },
+    handleDate(modelData) {
+      this.date = modelData
+      console.log(this.date)
       if (this.dataType === 4 || this.dataType === 5) {
         // axios changed data and update chart
         console.log('do it axios first')
       }
-    },
-    handleDate_second(modelData) {
-      this.date_second = modelData
-      console.log(this.date_second)
-      if (this.date_first) {
-        // axios changed data and update chart
-        console.log('do it axios second')
-      }
-    }
-  },
-  watch: {
-    date_first() {
-      console.log('first data changed')
-    },
-    date_second() {
-      console.log('second data changed')
     }
   },
   components: { VueApexCharts, Datepicker }

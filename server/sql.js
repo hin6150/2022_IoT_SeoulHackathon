@@ -1,5 +1,8 @@
 module.exports = {
   // 연습용 쿼리문 예제
+  selectBasicInformation: {
+    query: `select * from basic_information`
+  },
   productList : {
     query: `SELECT t1.*, t2.path, t3.category1, t3.category2, t3.category3 
     FROM t_product t1, t_image t2, t_category t3

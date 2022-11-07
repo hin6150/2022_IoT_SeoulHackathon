@@ -7,6 +7,7 @@
             기관(마포중앙도서관) 전체데이터
           </h4>
         </div>
+        <button @click="test">test</button>
         <div class="row mt-3 ms-2">
           <div class="row">
             <div
@@ -237,15 +238,23 @@ export default {
         console.log(err)
       })
     // 메인 페이지 주차장 초기화
-    this.$apiGet('/api').then((response) => {
-      for (let i = 0; i < response.data.length; i++) {
-        this.parkInfoList[i].total_park = response.data[i].TotalParkingLot
-        this.parkInfoList[i].enable_park = response.data[i].availableparking
-        this.parkInfoList[i].unable_park = response.data[i].emptyparking
-      }
-    })
+    // this.$apiPost('/api').then((response) => {
+    //   for (let i = 0; i < response.data.length; i++) {
+    //     this.parkInfoList[i].total_park = response.data[i].TotalParkingLot
+    //     this.parkInfoList[i].enable_park = response.data[i].availableparking
+    //     this.parkInfoList[i].unable_park = response.data[i].emptyparking
+    //   }
+    // })
   },
   methods: {
+    test () {
+      this.$apiPost('/api/selectBasicInformation', {})
+        .then((res) => {
+          console.log(res)
+        }).catch((err) => {
+          console.log(err)
+        })
+    },
     // goTo~~~ -> @click을 통한 라우팅 지정
     goToInner(floor) {
       this.$router.push({

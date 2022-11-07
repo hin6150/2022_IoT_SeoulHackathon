@@ -18,12 +18,12 @@ fs.watchFile(__dirname + '/sql.js', (curr, prev) => {
 let sql = require('./sql.js');
 
 const db = {
-  database: '', // 생성한 데이터베이스 이름
+  database: 'database', // 생성한 데이터베이스 이름
   connectionLimit: 10,
-  host: '', // 데이터베이스 서버 호스트 주소
-  port: 8000, // 데이터베이스 서버 포트 번호
-  user: '', // 데이터베이스 계정 정보
-  password: '' // 데이터베이스 계정 정보
+  host: '172.30.1.36', // 데이터베이스 서버 호스트 주소
+  port: 3306, // 데이터베이스 서버 포트 번호
+  user: 'Lab0104', // 데이터베이스 계정 정보
+  password: 'Lab0104!!' // 데이터베이스 계정 정보
 }
 
 const dbPool = require('mysql').createPool(db)
