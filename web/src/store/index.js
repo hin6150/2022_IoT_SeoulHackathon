@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    selectedDate: ['', ''],
     floorDataList: [
       {
         floorNumber: 6,
@@ -302,9 +303,6 @@ export default createStore({
           },
           stroke: {
             width: [0, 4]
-          },
-          title: {
-            text: '습도(%)'
           },
           dataLabels: {
             enabled: true,
@@ -806,9 +804,32 @@ export default createStore({
     ]
   },
   getters: {
-    // 중복되는 computed 메소드 통합 사용
+    getSelectedDate (state) {
+      return state.selectedDate
+    },
+    getFloorDataList (state) {
+      return state.floorDataList
+    },
+    getIotDataArray (state) {
+      return state.iotDataArray
+    },
+    getDataChartName (state) {
+      return state.dataChartName
+    }
   },
-  mutations: {},
+  mutations: {
+    selectedDate (state, data) {
+      state.selectedDate[0] = data[0]
+      state.selectedDate[1] = data[1]
+    },
+    floorDataList (state, data) { // 층별 시설 정보
+    },
+    iotDataArray (state, data) { // 차트 옵션, 차트 값 정보
+    },
+    dataChartName (state, data) {
+      state.dataChartName[0] = data
+    }
+  },
   actions: {},
   modules: {}
 })
