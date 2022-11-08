@@ -53,6 +53,7 @@ export default {
     }
   },
   created() {
+    window.scrollTo(0, 0)
     // view 처리 방식
     // this.dataChartArray = this.$store.state.iotDataArray
     // this.dataChartName = this.$store.state.dataChartName

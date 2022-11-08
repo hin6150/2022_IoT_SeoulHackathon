@@ -120,12 +120,14 @@
                   <tbody>
                     <tr :key="park" v-for="park in parkInfoList">
                       <th scope="row">{{ park.floor }}</th>
-                      <td>{{ park.total_park }}</td>
-                      <td>{{ park.enable_park }}</td>
-                      <td>{{ park.unable_park }}</td>
+                      <td>{{ park.total }}</td>
+                      <td>{{ park.empty }}</td>
+                      <td>{{ park.parking }}</td>
                     </tr>
                   </tbody>
                 </table>
+                <hr>
+                <div class='pb-3'>데이터 측정 일시 : {{ registration_date }}</div>
               </div>
             </div>
           </div>
@@ -180,23 +182,24 @@ export default {
       parkInfoList: [
         {
           floor: '2F',
-          total_park: 120,
-          enable_park: 96,
-          unable_park: 22
+          total: 0,
+          parking: 0,
+          empty: 0
         },
         {
           floor: '1F',
-          total_park: 50,
-          enable_park: 45,
-          unable_park: 5
+          total: 0,
+          parking: 0,
+          empty: 0
         },
         {
           floor: 'B1',
-          total_park: 50,
-          enable_park: 34,
-          unable_park: 16
+          total: 0,
+          parking: 0,
+          empty: 0
         }
       ],
+      registration_date: '',
       // 임시 층별데이터 리스트
       floorDataList: []
     }
@@ -204,6 +207,27 @@ export default {
   created() {
     this.floorDataList = this.$store.state.floorDataList
     this.getWeatherAPI()
+    this.$apiPost('/api/selectLatestParkingData', {})
+      .then((res) => {
+        this.registration_date = res[0].registration_date
+        for (const data in res) {
+          if (res[data].total === 52) {
+            this.parkInfoList[0].total = res[data].total
+            this.parkInfoList[0].parking = res[data].parking
+            this.parkInfoList[0].empty = res[data].empty
+          } else if (res[data].total === 102) {
+            this.parkInfoList[1].total = res[data].total
+            this.parkInfoList[1].parking = res[data].parking
+            this.parkInfoList[1].empty = res[data].empty
+          } else if (res[data].total === 38) {
+            this.parkInfoList[2].total = res[data].total
+            this.parkInfoList[2].parking = res[data].parking
+            this.parkInfoList[2].empty = res[data].empty
+          }
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
   },
   methods: {
     getWeatherAPI () { // open weather map api

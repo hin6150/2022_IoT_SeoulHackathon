@@ -9,6 +9,7 @@
     <div class="row">
       <div class="col">
         <p class="text-start fs-6">출력 데이터 기간</p>
+        <button @click='test()'>test</button>
         <div class="col col-md-6">
           <Datepicker v-model="date" range @update:modelValue="handleDate"/>
         </div>
@@ -55,6 +56,9 @@ export default {
     }
   },
   computed: { // store 처리 방식
+    // selectedDate () {
+    //   return this.$store.getters.getSelectedDate
+    // },
     selectedDate () {
       return this.$store.getters.getSelectedDate
     },
@@ -69,6 +73,7 @@ export default {
     }
   },
   created () {
+    window.scrollTo(0, 0)
   },
   mounted () {
     if (this.selectedDate[0].length === 0) {
@@ -79,6 +84,12 @@ export default {
     this.getIntegerDate()
   },
   methods: {
+    test () {
+      this.$apiPost('/api/selectBasicInformation', {})
+        .then((res) => {
+          console.log(res)
+        })
+    },
     // 출력 기간 기본값(y - x일 -> x일전부터 y일전까지)
     setupDefaultDate (startBeforeDayCount, endBeforeDayCount) {
       const date = new Date()
@@ -128,6 +139,7 @@ export default {
     },
     handleDate (modelData) {
       this.date = modelData
+      // this.$store.commit('selectedDate', this.date)
       this.$store.commit('selectedDate', this.date)
       console.log(this.date)
       this.getIntegerDate()

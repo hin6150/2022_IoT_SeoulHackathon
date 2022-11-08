@@ -25,7 +25,8 @@
     "vue-router": "^4.0.3",
     "vue3-apexcharts": "^1.4.1",
     "vuejs-datepicker": "^1.6.2",
-    "vuex": "^4.0.0"
+    "vuex": "^4.0.0",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

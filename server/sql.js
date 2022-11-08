@@ -1,8 +1,18 @@
 module.exports = {
-  // 연습용 쿼리문 예제
   selectBasicInformation: {
     query: `select * from basic_information`
   },
+  selectAirQualityData: {
+    query: `select * from airquality_data`
+  },
+  selectParkingData: {
+    query: `select * from parking_data`
+  },
+  // serial값이 정상 반영되면 order by에 serial 추가 예정
+  selectLatestParkingData: {
+    query: `SELECT * FROM database.parking_data where no <= 3 order by total`
+  },
+  // 연습용 쿼리문 예제
   productList : {
     query: `SELECT t1.*, t2.path, t3.category1, t3.category2, t3.category3 
     FROM t_product t1, t_image t2, t_category t3
@@ -41,7 +51,6 @@ module.exports = {
   signUp: {
     query: `insert into t_user set ? on duplicate key update ?`
   },
-  // 졸작용
   insertUserData: {
     query: `INSERT INTO user (email, password, userName) VALUES (?, ?, ?)`
   },
