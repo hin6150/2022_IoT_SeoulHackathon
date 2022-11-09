@@ -1,21 +1,17 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-  transpileDependencies: true
-})
-
-// node.js server 포트번호 3000 -> 향후 서버 url을 넣어주면 될듯
-const target = 'http://127.0.0.1:3000'
-
-module.exports = {
+  transpileDependencies: true,
   devServer: {
-    port: 8080, // client 포트번호
+    //① api 요청이 있을때 어디에서 처리할지를 설정
     proxy: {
-      '^/api': {
-        target,
-        changeOrigin: true
+      '/api': {
+        target: 'http://localhost:3000/api',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
       }
     }
-  }
-}
-// client에서 api가 포함되는 url로 요청 시 target에 설정된
-// localhost 3000번 포트에 열린 서버에서 url에 대한 요청을 실행하도록 proxy 설정
+  },
+  outputDir: '../backend/public' //② 배포 파일의 위치를 지정
+})
