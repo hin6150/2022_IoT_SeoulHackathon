@@ -1,6 +1,7 @@
 <template>
   <div>
-    <main style="background-color: #556cff; text-align: center">
+    <!-- dark mode : bg-dark -->
+    <div style="background-color: #556cff; text-align: center">
       <div class="container py-4">
         <div class="row mb-3">
           <h4 style="color: white; font-weight: bold">
@@ -9,21 +10,16 @@
         </div>
         <div class="row mt-3 ms-2">
           <div class="row">
-            <div
-              class="col-md-6 mb-2"
-              style="background-color: #556cff; text-align: center"
-            >
+            <!-- dark mode : col-md-6 mb-2 bg-dark -->
+            <div class="col-md-6 mb-2">
               <div class="container">
-                <p style="color: white; font-weight: bold">층별데이터</p>
+                <p class="data_title">층별데이터</p>
+                <!-- dark mode : row mb-2 rounded-3 text-black -->
                 <div
                   :key="floor"
                   v-for="floor in floorDataList"
-                  class="row mb-2 rounded-3"
-                  style="
-                    background-color: white;
-                    cursor: pointer;
-                    font-size: 12px;
-                  "
+                  class="row mb-2 rounded-3 bg-white"
+                  style="cursor: pointer; font-size: 12px;"
                   data-bs-toggle="modal"
                   :data-bs-target="'#floorModal' + floor.floorNumber"
                 >
@@ -77,12 +73,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6 ps-md-4" style="text-align: center">
-              <p style="color: white; font-weight: bold">야외데이터</p>
-              <div
-                class="col rounded-4"
-                style="background-color: white; font-size: 10px"
-              >
+            <div class="col-md-6 ps-md-4" style="text-align: center;">
+              <p class="data_title">야외데이터</p>
+              <div class="col rounded-4 bg-white" style="font-size: 10px">
                 <table class="table table-borderless">
                   <thead>
                     <tr>
@@ -94,25 +87,27 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <th scope="row">{{ weatherStatus }}</th>
+                      <th scope="row">
+                        {{ weatherStatus }}
+                      </th>
                       <td>
-                        {{ weatherData[0].temp }}℃<br />{{
-                          weatherData[0].humidity
-                        }}%
+                        {{ weatherData[0].temp }}℃<br/>
+                        {{ weatherData[0].humidity }}%
                       </td>
-                      <td>{{ weatherData[1].pm10 }}</td>
-                      <td>{{ weatherData[1].pm2_5 }}</td>
+                      <td>
+                        {{ weatherData[1].pm10 }}
+                      </td>
+                      <td>
+                        {{ weatherData[1].pm2_5 }}
+                      </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <p style="text-align: center; color: white; font-weight: bold">
+              <p class="data_title">
                 주차데이터
               </p>
-              <div
-                class="col rounded-4"
-                style="background-color: white; font-size: 10px"
-              >
+              <div class="col rounded-4 bg-white" style="font-size: 10px">
                 <table class="table table-borderless">
                   <thead>
                     <tr>
@@ -125,57 +120,51 @@
                   <tbody>
                     <tr :key="park" v-for="park in parkInfoList">
                       <th scope="row">{{ park.floor }}</th>
-                      <td>{{ park.total_park }}</td>
-                      <td>{{ park.enable_park }}</td>
-                      <td>{{ park.unable_park }}</td>
+                      <td>{{ park.total }}</td>
+                      <td>{{ park.empty }}</td>
+                      <td>{{ park.parking }}</td>
                     </tr>
                   </tbody>
                 </table>
+                <hr>
+                <div class='pb-3'>데이터 측정 일시 : {{ registration_date }}</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
     <hr />
-    <main style="background-color: white">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-sm-6 mb-3 align-self-center">
-            <img src="./../../public/monitoring.png" class="img-fluid" />
-          </div>
-          <div class="col-md-5 offset-md-1 col-sm-6 align-self-center">
-            <form class="pt-1">
-              <h4>통계 데이터</h4>
-              <hr />
-              <div style="text-align: left">
-                <p>모든 데이터를 통계로 보세요</p>
-                <p>
-                  데이터 종류, 기간, 필터, 그래프 종류 등 원하는 데이터를
-                  시각화할 수 있습니다.<br />
-                  그래프를 고르기 어렵다면 대시보드 모드를 사용해보세요.<br />
-                  여러 가지 그래프로 당신의 데이터를 나타내 준답니다.
-                </p>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 mb-3 align-self-center">
+          <img src="./../../public/monitoring.png" class="img-fluid rounded" />
+        </div>
+        <div class="col-md-5 offset-md-1 col-sm-6 align-self-center">
+          <form class="pt-1 ms-2 me-2">
+            <h4>통계 데이터</h4>
+            <hr/>
+            <div style="text-align: left">
+              <p>모든 데이터를 통계로 보세요</p>
+              <p>
+                데이터 종류, 기간, 필터, 그래프 종류 등 원하는 데이터를
+                시각화할 수 있습니다.<br />
+                그래프를 고르기 어렵다면 대시보드 모드를 사용해보세요.<br />
+                여러 가지 그래프로 당신의 데이터를 나타내 준답니다.
+              </p>
+            </div>
+            <div class="d-flex flex-row justify-content-end flex-sm-row w-100 gap-2">
+              <div class="p-2">
+                <button class="btn btn-primary" @click="goToStatistic" type="button"
+                style="float: right">
+                  통계데이터
+                </button>
               </div>
-              <div
-                class="d-flex flex-row justify-content-end flex-sm-row w-100 gap-2"
-              >
-                <div class="p-2">
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                    style="float: right"
-                    @click="goToStatistic"
-                  >
-                    통계데이터
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
-    </main>
+    </div>
   </div>
 </template>
 
@@ -184,69 +173,80 @@ export default {
   data() {
     return {
       // 실시간 야외 데이터(날씨상태, 온습도, 미세먼지)
+      urlWeatherApi: 'https://api.openweathermap.org/data/2.5/weather?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069&units=metric',
+      urlAirApi: 'http://api.openweathermap.org/data/2.5/air_pollution?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069',
       weatherStatus: '',
       weatherData: [[], []],
-      // 뷰 인스턴스 제거(페이지 이동)시 interval 제거용
       weatherInterval: {},
-      airInterval: {},
       // 임시 주차데이터 리스트
       parkInfoList: [
         {
           floor: '2F',
-          total_park: 120,
-          enable_park: 96,
-          unable_park: 22
+          total: 0,
+          parking: 0,
+          empty: 0
         },
         {
           floor: '1F',
-          total_park: 50,
-          enable_park: 45,
-          unable_park: 5
+          total: 0,
+          parking: 0,
+          empty: 0
         },
         {
           floor: 'B1',
-          total_park: 50,
-          enable_park: 34,
-          unable_park: 16
+          total: 0,
+          parking: 0,
+          empty: 0
         }
       ],
+      registration_date: '',
       // 임시 층별데이터 리스트
       floorDataList: []
     }
   },
   created() {
-    // 데이터 일회성 초기 할당
     this.floorDataList = this.$store.state.floorDataList
-    this.$apiGet(
-      'https://api.openweathermap.org/data/2.5/weather?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069&units=metric'
-    )
-      .then((response) => {
-        this.weatherStatus = response.data.weather[0].description
-        this.weatherData[0] = response.data.main
-      })
-      .catch((err) => {
+    this.getWeatherAPI()
+    this.$apiPost('/api/selectLatestParkingData', {})
+      .then((res) => {
+        this.registration_date = res[0].registration_date
+        for (const data in res) {
+          if (res[data].total === 52) {
+            this.parkInfoList[0].total = res[data].total
+            this.parkInfoList[0].parking = res[data].parking
+            this.parkInfoList[0].empty = res[data].empty
+          } else if (res[data].total === 102) {
+            this.parkInfoList[1].total = res[data].total
+            this.parkInfoList[1].parking = res[data].parking
+            this.parkInfoList[1].empty = res[data].empty
+          } else if (res[data].total === 38) {
+            this.parkInfoList[2].total = res[data].total
+            this.parkInfoList[2].parking = res[data].parking
+            this.parkInfoList[2].empty = res[data].empty
+          }
+        }
+      }).catch((err) => {
         console.log(err)
       })
-    this.$apiGet(
-      'http://api.openweathermap.org/data/2.5/air_pollution?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069'
-    )
-      .then((response) => {
-        this.weatherData[1] = response.data.list[0].components
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    // 메인 페이지 주차장 초기화
-    this.$apiGet('/api').then((response) => {
-      for (let i = 0; i < response.data.length; i++) {
-        this.parkInfoList[i].total_park = response.data[i].TotalParkingLot
-        this.parkInfoList[i].enable_park = response.data[i].availableparking
-        this.parkInfoList[i].unable_park = response.data[i].emptyparking
-      }
-    })
   },
   methods: {
-    // goTo~~~ -> @click을 통한 라우팅 지정
+    getWeatherAPI () { // open weather map api
+      this.$apiGet(this.urlWeatherApi)
+        .then((response) => {
+          this.weatherStatus = response.data.weather[0].description
+          this.weatherData[0] = response.data.main
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      this.$apiGet(this.urlAirApi)
+        .then((response) => {
+          this.weatherData[1] = response.data.list[0].components
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     goToInner(floor) {
       this.$router.push({
         path: '/inner',
@@ -257,41 +257,22 @@ export default {
     },
     goToStatistic() {
       this.$router.push({ path: '/statistic' })
-    },
-    // 반복 setInterval 비동기 함수의 반복을 중지해주는 clearInterval
-    stopRepeat(weatherInterval, airInterval) {
-      clearInterval(weatherInterval)
-      clearInterval(airInterval)
     }
   },
-  mounted() {
-    // 데이터 n초마다 받아오는 부분(실시간 업데이트 처리)
+  mounted() { // 1분 갱신 주기로 야외데이터 날씨 정보 업데이트
     this.weatherInterval = setInterval(() => {
-      this.$apiGet(
-        'https://api.openweathermap.org/data/2.5/weather?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069&units=metric'
-      )
-        .then((response) => {
-          this.weatherStatus = response.data.weather[0].description
-          this.weatherData[0] = response.data.main
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    }, 60000)
-    this.airInterval = setInterval(() => {
-      this.$apiGet(
-        'http://api.openweathermap.org/data/2.5/air_pollution?lat=37.568&lon=126.978&appid=cbe5bdc9b8d6bb30982a8e86f3473069'
-      )
-        .then((response) => {
-          this.weatherData[1] = response.data.list[0].components
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      this.getWeatherAPI()
     }, 60000)
   },
   unmounted() {
-    this.stopRepeat(this.weatherInterval, this.airInterval)
+    clearInterval(this.weatherInterval)
   }
 }
 </script>
+
+<style scoped>
+  .data_title {
+    color: white;
+    font-weight: bold;
+  }
+</style>

@@ -1,75 +1,35 @@
 <template>
-  <div>
-    <main>
-      <div class="container">
-        <div class="row mt-4">
-          <div class="col">
-            <p class="text-start mb-4 fs-4">마포중앙도서관 대시보드</p>
-            <hr>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <p class="text-start fs-6">출력 데이터 기간</p>
-            <div class="col col-md-6">
-              <Datepicker v-model="date" range @update:modelValue="handleDate"/>
-            </div>
-          </div>
-        </div>
-        <div class="row g-3 pt-4">
-          <div class="col-md-6" :key="i" v-for="(data, i) in dataChartArray">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title mt-3 ms-2 text-start" style="cursor: pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="클릭 시 상세페이지로 이동" @click="goToDetail(i)">
-                  {{ dataChartName[i] }}
-                </h5>
-              </div>
-              <VueApexCharts :options="data.chartOptions" :series="data.series"></VueApexCharts>
-            </div>
-          </div>
-          <!-- <div class="col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title mt-3 ms-2 text-start">주차장</h5>
-              </div>
-              <VueApexCharts :options="parkDataSet.chartOptions" :series="parkDataSet.series"></VueApexCharts>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title mt-3 ms-2 text-start">실내 온도(℃)</h5>
-              </div>
-              <VueApexCharts :options="tempDataSet.chartOptions" :series="tempDataSet.series"></VueApexCharts>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title mt-3 ms-2 text-start">실내 습도(%)</h5>
-              </div>
-              <VueApexCharts :options="humDataSet.chartOptions" :series="humDataSet.series"></VueApexCharts>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title mt-3 ms-2 text-start">실내 미세먼지(PM10)</h5>
-              </div>
-              <VueApexCharts :options="PM_10_DataSet.chartOptions" :series="PM_10_DataSet.series"></VueApexCharts>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title mt-3 ms-2 text-start">실내 초미세먼지(PM2.5)</h5>
-              </div>
-              <VueApexCharts :options="PM_2_5_DataSet.chartOptions" :series="PM_2_5_DataSet.series"></VueApexCharts>
-            </div>
-          </div> -->
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col">
+        <p class="text-start mb-4 fs-4">마포중앙도서관 대시보드</p>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p class="text-start fs-6">출력 데이터 기간</p>
+        <button @click='test()'>test</button>
+        <div class="col col-md-6">
+          <Datepicker v-model="date" range @update:modelValue="handleDate"/>
         </div>
       </div>
-    </main>
+    </div>
+    <div class="row g-3 pt-4">
+      <div class="col-md-6" :key="i" v-for="(data, i) in dataChartArray">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title mt-3 ms-2 text-start" style="cursor: pointer"
+            data-bs-toggle="tooltip" data-bs-placement="top"
+            title="클릭 시 상세페이지로 이동" @click="goToDetail(i)"
+            >
+              {{ dataChartName[i] }}
+            </h5>
+          </div>
+          <VueApexCharts :options="data.chartOptions" :series="data.series"></VueApexCharts>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -82,36 +42,59 @@ export default {
   data () {
     return {
       date: null,
-      dataType: '',
-      dataChartName: [],
-      dataChartArray: [
-        {}, // noise
-        {}, // park
-        {}, // temp
-        {}, // hum
-        {}, // pm10
-        {} // pm2.5
-      ],
-      postDate: ['', ''],
-      monthNum: [0, 0],
-      upHere: false
+      selectedIntegerDate: ['', ''],
+      monthNum: [0, 0]
+      // dataChartName: [],
+      // dataChartArray: [
+      //   {}, // noise
+      //   {}, // park
+      //   {}, // temp
+      //   {}, // hum
+      //   {}, // pm10
+      //   {} // pm2.5
+      // ]
+    }
+  },
+  computed: { // store 처리 방식
+    // selectedDate () {
+    //   return this.$store.getters.getSelectedDate
+    // },
+    selectedDate () {
+      return this.$store.getters.getSelectedDate
+    },
+    dataChartName () {
+      return this.$store.getters.getDataChartName
+    },
+    floorDataList () {
+      return this.$store.getters.getFloorDataList
+    },
+    dataChartArray () {
+      return this.$store.getters.getIotDataArray
     }
   },
   created () {
-    // 출력 기간 기본값(7일)
-    this.setupDefaultDate()
-    this.dataChartArray = this.$store.state.iotDataArray
-    this.dataChartName = this.$store.state.dataChartName
-    // Calendar 선택 날짜 -> 형식 : 'yyyymmdd'
-    this.getPostSendDate()
+    window.scrollTo(0, 0)
   },
   mounted () {
+    if (this.selectedDate[0].length === 0) {
+      this.setupDefaultDate(2, 9)
+    } else {
+      this.date = this.selectedDate
+    }
+    this.getIntegerDate()
   },
   methods: {
-    setupDefaultDate () {
+    test () {
+      this.$apiPost('/api/selectBasicInformation', {})
+        .then((res) => {
+          console.log(res)
+        })
+    },
+    // 출력 기간 기본값(y - x일 -> x일전부터 y일전까지)
+    setupDefaultDate (startBeforeDayCount, endBeforeDayCount) {
       const date = new Date()
-      const startDate = new Date(new Date().setDate(date.getDate() - 9))
-      const endDate = new Date(new Date().setDate(date.getDate() - 2))
+      const startDate = new Date(new Date().setDate(date.getDate() - endBeforeDayCount))
+      const endDate = new Date(new Date().setDate(date.getDate() - startBeforeDayCount))
       this.date = [startDate, endDate]
     },
     getMonthNumber (str) {
@@ -142,37 +125,38 @@ export default {
           return 12
       }
     },
-    getPostSendDate () {
+    // Calendar 선택 날짜 형식 변환 -> 'yyyymmdd' -> 향후 데이터베이스 대비용
+    getIntegerDate () {
       for (let i = 0; i < 2; i++) {
         const splitStr = String(this.date[i]).split(' ')
         this.monthNum[i] = this.getMonthNumber(splitStr[1])
         if (this.monthNum[i] < 10) {
           this.monthNum[i] = '0' + this.monthNum[i]
         }
-        this.postDate[i] += (String(splitStr[3]) + this.monthNum[i] + String(splitStr[2]))
+        const integerDate = String(splitStr[3]) + this.monthNum[i] + String(splitStr[2])
+        this.selectedIntegerDate[i] = integerDate
       }
     },
     handleDate (modelData) {
       this.date = modelData
-      // axios changed data and update chart
-      this.$apiPost('/api/calendar', { param: this.postDate })
-        .then((response) => {
-          console.log('post then')
-          console.log(response)
-          this.dataChartArray[0].series[0].data = [80, 70, 60, 50, 40, 30]
-        })
+      // this.$store.commit('selectedDate', this.date)
+      this.$store.commit('selectedDate', this.date)
+      console.log(this.date)
+      this.getIntegerDate()
+      console.log(this.selectedIntegerDate)
+      // this.$apiPost('/api/calendar', { param: this.postDate })
+      //   .then((response) => {
+      //     console.log(response)
+      //     this.dataChartArray[0].series[0].data = [80, 70, 60, 50, 40, 30]
+      //   })
     },
     goToDetail (typeNum) {
       this.$router.push({
         path: '/detail',
         query: { dataType: typeNum }
       })
-    },
-    change () { // 날짜 선택 후 차트 렌더링
-      console.log('sample')
     }
   },
-  name: 'App',
   components: { VueApexCharts, Datepicker }
 }
 </script>
