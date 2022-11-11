@@ -6,5 +6,16 @@ import mixins from './mixins'
 import VueApexCharts from 'vue3-apexcharts'
 import Datepicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
+import axios from 'axios'
 
-createApp(App).use(VueApexCharts).use(store).use(router).mixin(mixins).component('Datepicker', Datepicker).mount('#app')
+const app = createApp(App)
+
+app
+  .use(VueApexCharts)
+  .use(store)
+  .use(router)
+  .mixin(mixins)
+  .component('Datepicker', Datepicker)
+  .mount('#app')
+
+app.config.globalProperties.$http = axios
