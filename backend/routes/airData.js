@@ -46,7 +46,12 @@ router.post('/create', function (req, res) {
   connection.query(
     'CREATE TABLE if not exists airData (no INT NOT NULL AUTO_INCREMENT, serial VARCHAR(45) NULL, obsDate VARCHAR(45) NULL, temp INT NULL, hum INT NULL, fineDust INT NULL, utraFineDust INT NULL, noise INT NULL, PRIMARY KEY (no)) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8',
     function (err, row) {
-      if (err) throw err
+      if (err) {
+        res.json({
+          success: false,
+          message: 'data failed!'
+        })
+      }
     }
   )
   res.json({
@@ -127,20 +132,25 @@ router.post('/update', function (req, res) {
             data[service]['row'][i].COLUMN9 + //초미세먼지
             '","' +
             data[service]['row'][i].COLUMN6 + //소음
-            '" FROM DUAL WHERE NOT EXISTS (SELECT serial, obsdate FROM airData WHERE serial ="' +
+            '" FROM DUAL WHERE NOT EXISTS (SELECT serial, obsDate FROM airData WHERE serial ="' +
             data[service]['row'][i].COLUMN1 +
             '" AND obsDate = "' +
             data[service]['row'][i].COLUMN2 +
             '")',
           function (err, row2) {
-            if (err) throw err
+            if (err) {
+              res.json({
+                success: false,
+                message: 'data failed!'
+              })
+            }
           }
         )
+        res.json({
+          success: true,
+          message: 'data pushed!'
+        })
       }
-      res.json({
-        success: true,
-        message: 'data pushed!'
-      })
     }
   )
 })
