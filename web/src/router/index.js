@@ -4,6 +4,7 @@ import InnerComponent from '../views/InnerComponent.vue'
 import StatisticComponent from '../views/StatisticComponent.vue'
 import DetailComponent from '../views/DetailComponent.vue'
 import AirDataBaseComponent from '../views/AirDataBaseComponent'
+import ParkingDataBaseComponent from '../views/ParkingDataBaseComponent'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/air',
     name: 'AirDataBaseComponent',
     component: AirDataBaseComponent
+  },
+  {
+    path: '/parking',
+    name: 'ParkingDataBaseComponent',
+    component: ParkingDataBaseComponent
   }
 ]
 
