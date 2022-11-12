@@ -21,7 +21,7 @@ var connection = mysql.createConnection({
   port: 3306,
   user: 'jihye',
   password: 'jihye0411',
-  database: 'hong'
+  database: 'test'
 })
 // var connection = mysql.createConnection({
 //   host: 'localhost',
@@ -47,14 +47,14 @@ router.post('/create', function (req, res) {
     'CREATE TABLE if not exists airData (no INT NOT NULL AUTO_INCREMENT, serial VARCHAR(45) NULL, obsDate VARCHAR(45) NULL, temp INT NULL, hum INT NULL, fineDust INT NULL, utraFineDust INT NULL, noise INT NULL, PRIMARY KEY (no)) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8',
     function (err, row) {
       if (err) {
-        res.json({
+        return res.json({
           success: false,
           message: 'data failed!'
         })
       }
     }
   )
-  res.json({
+  return res.json({
     success: true,
     message: 'data created!'
   })
@@ -139,14 +139,14 @@ router.post('/update', function (req, res) {
             '")',
           function (err, row2) {
             if (err) {
-              res.json({
+              return res.json({
                 success: false,
                 message: 'data failed!'
               })
             }
           }
         )
-        res.json({
+        return res.json({
           success: true,
           message: 'data pushed!'
         })
