@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse ms-1" id="navbarSupportedContent">
           <ul
             class="navbar-nav me-auto mb-2 mb-sm-0"
-            style="text-align: center; font-weight: bold"
+            style="text-align: center; font-weight: bold; font-size: 12px;"
           >
             <li class="nav-item me-2">
               <router-link class="nav-link" to="/">Home</router-link>
