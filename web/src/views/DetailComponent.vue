@@ -14,9 +14,8 @@
         </div>
       </div>
     </div>
-    <button @click='test()'>test</button>
     <div class="row g-3 pt-4">
-      <div class="col-xl-4 col-lg-6" :key="i" v-for="(series, i) in dataSeries">
+      <div class="col-xl-4 col-lg-6" :key="i" v-for="(series, i) in chartSeries">
         <div class="card">
           <div class="card-body">
             <div class="card-title mt-1 ms-2 mb-0 text-start fs-6">
@@ -24,7 +23,7 @@
             </div>
           </div>
           <VueApexCharts
-            :options="dataSeries[i].chartOptions" :series="dataSeries[i].series"
+            :options="chartOptions" :series="chartSeries[i].series"
           ></VueApexCharts>
         </div>
       </div>
@@ -44,27 +43,64 @@ export default {
       selectedIntegerDate: ['', ''],
       monthNum: [0, 0],
       dataType: 0,
-      dataSeries: [],
-      //
       currentTmp: [],
       emptyTmp: [],
-      arrayTmp: [],
-      objCurrentTmp: {},
-      objEmptyTmp: {},
-      objTmp: {},
-      //
-      chartName: []
-      // dataChartArray: [
-      //   {}, // noise
-      //   {}, // park
-      //   {}, // temp
-      //   {}, // hum
-      //   {}, // pm10
-      //   {} // pm2.5
-      // ]
+      chartName: [],
+      chartSeries: [],
+      chartOptions: [],
+      parkingSeries: [
+        {
+          series: [
+            {
+              name: '평균 주차 중',
+              data: [1, 2, 3]
+            },
+            {
+              name: '평균 빈 자리',
+              data: [4, 5, 6]
+            }
+          ]
+        },
+        {
+          series: [
+            {
+              name: '평균 주차 중',
+              data: [7, 8, 9]
+            },
+            {
+              name: '평균 빈 자리',
+              data: [10, 11, 12]
+            }
+          ]
+        },
+        {
+          series: [
+            {
+              name: '평균 주차 중',
+              data: [13, 14, 15]
+            },
+            {
+              name: '평균 빈 자리',
+              data: [21, 22, 23]
+            }
+          ]
+        },
+        {
+          series: [
+            {
+              name: '평균 주차 중',
+              data: [31, 32, 33]
+            },
+            {
+              name: '평균 빈 자리',
+              data: [34, 41, 42]
+            }
+          ]
+        }
+      ]
     }
   },
-  computed: { // store 처리 방식
+  computed: {
     selectedDate () {
       return this.$store.getters.getSelectedDate
     },
@@ -89,20 +125,34 @@ export default {
       this.date = this.selectedDate
     }
     this.getIntegerDate()
-    this.getParkingDataAVGAllTime(this.selectedIntegerDate[0], this.selectedIntegerDate[1])
+    switch (this.dataType) {
+      case 0:
+        break
+      case 1:
+        this.getParkingDataAVGAllTime(this.selectedIntegerDate[0], this.selectedIntegerDate[1])
+        this.chartSeries = this.parkingSeries
+        this.chartOptions = this.dataChartArray[this.dataType].chartOptions
+        break
+      case 2:
+        break
+      case 3:
+        break
+      case 4:
+        break
+      case 5:
+        break
+    }
   },
   methods: {
     async handleDate(modelData) {
       this.date = modelData
       this.$store.commit('selectedDate', this.date)
       this.getIntegerDate()
-      this.dataSeries = []
       switch (this.dataType) {
         case 0:
           break
         case 1:
           this.getParkingDataAVGAllTime(this.selectedIntegerDate[0], this.selectedIntegerDate[1])
-          console.log(this.dataSeries)
           break
         case 2:
           break
@@ -114,35 +164,11 @@ export default {
           break
       }
     },
-    test() {
-      for (const i in this.dataSeries[0].series[0].data) {
-        this.dataSeries[0].series[0].data[i] += 2
-        // 한 가지 차트의 Series 데이터만 더해주는데도 모든 차트값이 올라가버림
-      }
-    },
     async getParkingDataAVGAllTime (start, end) {
       await this.getParkingDataAVGTime('오전(09~12시)', 0, start, end, '........09|........10|........11|........12')
-      this.updateChart(0)
       await this.getParkingDataAVGTime('오후(13~16시)', 1, start, end, '........13|........14|........15|........16')
-      this.updateChart(1)
       await this.getParkingDataAVGTime('저녁(17~19시)', 2, start, end, '........17|........18|........19')
-      this.updateChart(2)
       await this.getParkingDataAVGTime('밤(20~22시)', 3, start, end, '........20|........21|........22')
-      this.updateChart(3)
-      console.log(this.dataSeries)
-    },
-    // 각 각 다른 값임을 분명히 확인하고 할당해도 전체 차트 값이 동일해짐
-    async updateChart (index) {
-      console.log(this.objCurrentTmp.data)
-      console.log(this.objEmptyTmp.data)
-      for (const i in this.objCurrentTmp.data) {
-        console.log(i)
-        this.dataSeries[index].series[0].data[i] = this.objCurrentTmp.data[i]
-        console.log(this.objCurrentTmp.data[i])
-      }
-      for (const i in this.objEmptyTmp.data) {
-        this.dataSeries[index].series[1].data[i] = this.objEmptyTmp.data[i]
-      }
     },
     async getParkingDataAVGTime (name, index, start, end, time) {
       await this.$apiPost('/api/selectParkingDataAVGTime', { param: [start, end, time] })
@@ -151,23 +177,11 @@ export default {
           for (const i in res) {
             this.currentTmp.push(res[i].avgCurrent)
             this.emptyTmp.push(res[i].avgEmpty)
-            // this.dataSeries[index][0].data[i] = res[i].avgCurrent
-            // this.dataSeries[index][1].data[i] = res[i].avgEmpty
-            // console.log(this.dataSeries[index])
           }
-          this.objCurrentTmp.name = '평균 주차 중'
-          this.objEmptyTmp.name = '평균 빈 자리'
-          this.objCurrentTmp.data = this.currentTmp
-          this.objEmptyTmp.data = this.emptyTmp
-          this.arrayTmp.push(this.objCurrentTmp)
-          this.arrayTmp.push(this.objEmptyTmp)
-          this.objTmp.series = this.arrayTmp
-          this.objTmp.chartOptions = this.dataChartArray[this.dataType].chartOptions
-          this.dataSeries.push(this.objTmp)
-          // this.arrayTmp.push({ ...this.currentTmp, ...this.emptyTmp })
+          this.parkingSeries[index].series[0].data = this.currentTmp.slice()
+          this.parkingSeries[index].series[1].data = this.emptyTmp.slice()
           this.currentTmp = []
           this.emptyTmp = []
-          this.arrayTmp = []
         })
     },
     setupDefaultDate (startBeforeDayCount, endBeforeDayCount) {
