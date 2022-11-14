@@ -120,14 +120,14 @@
                   <tbody>
                     <tr :key="park" v-for="park in parkInfoList">
                       <th scope="row">{{ park.floor }}</th>
-                      <td>{{ park.total }}</td>
-                      <td>{{ park.empty }}</td>
-                      <td>{{ park.parking }}</td>
+                      <td>{{ park.parkingSpace }}</td>
+                      <td>{{ park.emptySpace }}</td>
+                      <td>{{ park.currentSpace }}</td>
                     </tr>
                   </tbody>
                 </table>
                 <hr>
-                <div class='pb-3'>데이터 측정 일시 : {{ registration_date }}</div>
+                <div class='pb-3'>데이터 측정 일시 : {{ obsDate }}</div>
               </div>
             </div>
           </div>
@@ -181,25 +181,25 @@ export default {
       // 임시 주차데이터 리스트
       parkInfoList: [
         {
-          floor: '2F',
-          total: 0,
-          parking: 0,
-          empty: 0
-        },
-        {
           floor: '1F',
-          total: 0,
-          parking: 0,
-          empty: 0
+          parkingSpace: 0,
+          currentSpace: 0,
+          emptySpace: 0
         },
         {
           floor: 'B1',
-          total: 0,
-          parking: 0,
-          empty: 0
+          parkingSpace: 0,
+          currentSpace: 0,
+          emptySpace: 0
+        },
+        {
+          floor: 'B2',
+          parkingSpace: 0,
+          currentSpace: 0,
+          emptySpace: 0
         }
       ],
-      registration_date: '',
+      obsDate: '',
       // 임시 층별데이터 리스트
       floorDataList: []
     }
@@ -207,23 +207,15 @@ export default {
   created() {
     this.floorDataList = this.$store.state.floorDataList
     this.getWeatherAPI()
-    this.$apiPost('/api/selectLatestParkingData', {})
+    this.$apiPost('/api/selectParkingDataLatest', {})
       .then((res) => {
-        this.registration_date = res[0].registration_date
+        this.$store.commit('iotDataArrayParking', res)
+        const date = res[0].obsDate
+        this.obsDate = date.slice(0, 4) + '년 ' + date.slice(4, 6) + '월 ' + date.slice(6, 8) + '일 ' + date.slice(8, 10) + '시'
         for (const data in res) {
-          if (res[data].total === 52) {
-            this.parkInfoList[0].total = res[data].total
-            this.parkInfoList[0].parking = res[data].parking
-            this.parkInfoList[0].empty = res[data].empty
-          } else if (res[data].total === 102) {
-            this.parkInfoList[1].total = res[data].total
-            this.parkInfoList[1].parking = res[data].parking
-            this.parkInfoList[1].empty = res[data].empty
-          } else if (res[data].total === 38) {
-            this.parkInfoList[2].total = res[data].total
-            this.parkInfoList[2].parking = res[data].parking
-            this.parkInfoList[2].empty = res[data].empty
-          }
+          this.parkInfoList[data].parkingSpace = res[data].parkingSpace
+          this.parkInfoList[data].currentSpace = res[data].currentSpace
+          this.parkInfoList[data].emptySpace = res[data].emptySpace
         }
       }).catch((err) => {
         console.log(err)

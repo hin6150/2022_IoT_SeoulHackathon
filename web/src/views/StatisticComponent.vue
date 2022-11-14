@@ -9,7 +9,6 @@
     <div class="row">
       <div class="col">
         <p class="text-start fs-6">출력 데이터 기간</p>
-        <button @click='test()'>test</button>
         <div class="col col-md-6">
           <Datepicker v-model="date" range @update:modelValue="handleDate"/>
         </div>
@@ -26,7 +25,9 @@
               {{ dataChartName[i] }}
             </h5>
           </div>
-          <VueApexCharts :options="data.chartOptions" :series="data.series"></VueApexCharts>
+          <VueApexCharts
+          :options="data.chartOptions" :series="avgSeries[i]">
+          </VueApexCharts>
         </div>
       </div>
     </div>
@@ -43,22 +44,19 @@ export default {
     return {
       date: null,
       selectedIntegerDate: ['', ''],
-      monthNum: [0, 0]
-      // dataChartName: [],
-      // dataChartArray: [
-      //   {}, // noise
-      //   {}, // park
-      //   {}, // temp
-      //   {}, // hum
-      //   {}, // pm10
-      //   {} // pm2.5
-      // ]
+      monthNum: [0, 0],
+      columnNames: [],
+      avgSeries: [
+        [],
+        [],
+        [],
+        [],
+        [],
+        []
+      ]
     }
   },
-  computed: { // store 처리 방식
-    // selectedDate () {
-    //   return this.$store.getters.getSelectedDate
-    // },
+  computed: {
     selectedDate () {
       return this.$store.getters.getSelectedDate
     },
@@ -74,6 +72,10 @@ export default {
   },
   created () {
     window.scrollTo(0, 0)
+    for (const i in this.dataChartArray) {
+      this.avgSeries[i] = this.dataChartArray[i].series.slice()
+    }
+    this.getAirDataColumnName(['noise', 'serial', 'temp', 'hum', 'fineDust', 'utraFineDust', 'noise', 'serial', 'temp', 'hum', 'fineDust', 'utraFineDust'])
   },
   mounted () {
     if (this.selectedDate[0].length === 0) {
@@ -82,20 +84,63 @@ export default {
       this.date = this.selectedDate
     }
     this.getIntegerDate()
+    this.getParkingDataAVG(this.selectedIntegerDate[0], this.selectedIntegerDate[1])
+    // 기본값 세팅 -> 주간 평균 데이터 삽입
+    this.getAirDataAVG('202211050000', '202211120000')
+      .then((res) => {
+        for (let seriesNum = 0; seriesNum < 6; seriesNum++) {
+          if (seriesNum === 1) continue
+          else {
+            if (seriesNum < 4) {
+              for (const i in res) {
+                this.dataChartArray[seriesNum].series[0].data[i] = parseInt(res[i][this.columnNames[seriesNum].COLUMN_NAME])
+              }
+            }
+          }
+        }
+      })
+    // 출력 데이터 날짜 선택값 세팅 -> 선택 된 날짜동안 평균값 차트에 삽입
+    this.getAirDataAVG(this.selectedIntegerDate[0] + '00', this.selectedIntegerDate[1] + '00')
+      .then((res) => {
+        for (let seriesNum = 0; seriesNum < 6; seriesNum++) {
+          if (seriesNum === 1) continue
+          if (seriesNum < 4) {
+            for (const i in res) {
+              this.dataChartArray[seriesNum].series[1].data[i] = parseInt(res[i][this.columnNames[seriesNum].COLUMN_NAME])
+            }
+          } else {
+            for (const i in res) {
+              this.dataChartArray[seriesNum].series[0].data[i].y = parseInt(res[i][this.columnNames[seriesNum].COLUMN_NAME])
+            }
+          }
+        }
+      })
   },
   methods: {
-    test () {
-      this.$apiPost('/api/selectBasicInformation', {})
-        .then((res) => {
-          console.log(res)
-        })
-    },
     // 출력 기간 기본값(y - x일 -> x일전부터 y일전까지)
     setupDefaultDate (startBeforeDayCount, endBeforeDayCount) {
       const date = new Date()
       const startDate = new Date(new Date().setDate(date.getDate() - endBeforeDayCount))
       const endDate = new Date(new Date().setDate(date.getDate() - startBeforeDayCount))
       this.date = [startDate, endDate]
+    },
+    async getAirDataColumnName (names) {
+      await this.$apiPost('/api/selectAirDataColumnName', { param: names })
+        .then((res) => {
+          this.columnNames = res
+        })
+    },
+    async getAirDataAVG (start, end) {
+      return await this.$apiPost('/api/selectAirDataAVG', { param: [start, end] })
+    },
+    async getParkingDataAVG (start, end) {
+      await this.$apiPost('/api/selectParkingDataAVG', { param: [start, end] })
+        .then((res) => {
+          for (const i in res) {
+            this.avgSeries[1][0].data[i] = res[i].avgCurrent
+            this.avgSeries[1][1].data[i] = res[i].avgEmpty
+          }
+        })
     },
     getMonthNumber (str) {
       switch (str) {
@@ -134,21 +179,30 @@ export default {
           this.monthNum[i] = '0' + this.monthNum[i]
         }
         const integerDate = String(splitStr[3]) + this.monthNum[i] + String(splitStr[2])
-        this.selectedIntegerDate[i] = integerDate
+        this.selectedIntegerDate[i] = integerDate + '00'
       }
     },
     handleDate (modelData) {
       this.date = modelData
-      // this.$store.commit('selectedDate', this.date)
       this.$store.commit('selectedDate', this.date)
-      console.log(this.date)
       this.getIntegerDate()
-      console.log(this.selectedIntegerDate)
-      // this.$apiPost('/api/calendar', { param: this.postDate })
-      //   .then((response) => {
-      //     console.log(response)
-      //     this.dataChartArray[0].series[0].data = [80, 70, 60, 50, 40, 30]
-      //   })
+      this.getParkingDataAVG(this.selectedIntegerDate[0], this.selectedIntegerDate[1])
+      // 출력 데이터 날짜 선택값 세팅 -> 선택 된 날짜동안 평균값 차트에 삽입
+      this.getAirDataAVG(this.selectedIntegerDate[0] + '00', this.selectedIntegerDate[1] + '00')
+        .then((res) => {
+          for (let seriesNum = 0; seriesNum < 6; seriesNum++) {
+            if (seriesNum === 1) continue
+            if (seriesNum < 4) {
+              for (const i in res) {
+                this.dataChartArray[seriesNum].series[1].data[i] = parseInt(res[i][this.columnNames[seriesNum].COLUMN_NAME])
+              }
+            } else {
+              for (const i in res) {
+                this.dataChartArray[seriesNum].series[0].data[i].y = parseInt(res[i][this.columnNames[seriesNum].COLUMN_NAME])
+              }
+            }
+          }
+        })
     },
     goToDetail (typeNum) {
       this.$router.push({

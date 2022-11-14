@@ -146,12 +146,12 @@ export default createStore({
       {
         series: [
           {
-            name: '주차 중',
-            data: [22, 5, 16]
+            name: '평균 주차 중',
+            data: [0, 0, 0]
           },
           {
-            name: '주차 가능',
-            data: [96, 45, 34]
+            name: '평균 빈 자리',
+            data: [0, 0, 0]
           }
         ],
         chartOptions: {
@@ -285,6 +285,7 @@ export default createStore({
       },
       // hum data set : index 3
       {
+        // 'noise', 'temp', 'hum', 'fineDust', 'utraFineDust'
         series: [
           {
             name: '주간 평균 습도',
@@ -824,7 +825,11 @@ export default createStore({
     },
     floorDataList (state, data) { // 층별 시설 정보
     },
-    iotDataArray (state, data) { // 차트 옵션, 차트 값 정보
+    iotDataArrayParking (state, data) { // 차트 옵션, 차트 값 정보
+      for (const i in data) {
+        state.iotDataArray[1].series[0].data[i] = data[i].currentSpace
+        state.iotDataArray[1].series[1].data[i] = data[i].emptySpace
+      }
     },
     dataChartName (state, data) {
       state.dataChartName[0] = data
