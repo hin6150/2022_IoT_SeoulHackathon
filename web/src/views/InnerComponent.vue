@@ -56,7 +56,7 @@
                 <tr>
                   <td v-for="data in chartData" :key="data">
                     <div v-for="check in floorData[active.floor]" :key="check">
-                      <div v-if="check.Serial == active.serial">
+                      <div v-if="check.serial == active.serial">
                         <p class="text-start fs-6">
                           {{ check[data] }}{{ unitData[data] }}
                         </p>
@@ -95,14 +95,29 @@ export default {
       // DB에서 값을 가져와 B1 ~ 6층의 값 저장
       floorData: [[], [], [], [], [], [], []],
       // 온도, 습도, 미세먼지, 초미세먼지, 소음
-      chartData: ['temperature', 'humid', 'finedust', 'ultrafinedust', 'noise'],
+      chartData: ['temp', 'hum', 'fineDust', 'utraFineDust', 'noise'],
       // 기호
       unitData: {
-        temperature: '℃',
-        humid: '%',
-        finedust: '㎍/㎥',
-        ultrafinedust: '㎍/㎥',
+        temp: '℃',
+        hum: '%',
+        fineDust: '㎍/㎥',
+        utraFineDust: '㎍/㎥',
         noise: '㏈'
+      },
+      floorSerial: {
+        2: ['V01G1613633', 'V01G1613634', 'V01G1613632', 'V01G1613538'],
+        3: ['V01G1613636', 'V01G1613630', 'V01G1613631', 'V01G1613539'],
+        4: ['V01G1613626', 'V01G1613628', 'V01G1613629', 'V01G1613543'],
+        5: [
+          'V01G1613604',
+          'V01G1613625',
+          'V01G1613611',
+          'V01G1613612',
+          'V01G1613619',
+          'V01G1613624',
+          'V01G1613623'
+        ],
+        6: ['V01G1613601', 'V01G1613544']
       }
     }
   },
@@ -141,41 +156,26 @@ export default {
   },
   created() {
     this.floor = this.$route.query.floor
-    // DB로부터 값 가져오기
-    this.$apiGet('/api/floor').then((response) => {
-      this.axiosFloorData = response.data
+    // console.log(this.floorData)
+  },
+  mounted() {
+    this.$apiPost('/api/selectAirFloorData').then((res) => {
+      this.axiosFloorData = res
+      // console.log('floorData: ' + JSON.stringify(this.axiosFloorData))
       for (const data of this.axiosFloorData) {
-        data.temperature = parseInt((data.temperature / 10 - 100) * 10) / 10
-        // Error 값일 경우 null처리
-        if (data.noise === '999' && data.humid === '999') {
-          data.humid = 'null '
-          data.noise = 'null '
-          data.temperature = 'null '
-          data.ultrafinedust = 'null '
-          data.finedust = 'null '
-        }
-        if (parseInt(data.floor) === -1) {
-          // 지하 1층
-          this.floorData[0].push(data)
-        } else if (parseInt(data.floor) === 2) {
-          // 2층
-          this.floorData[2].push(data)
-        } else if (parseInt(data.floor) === 3) {
-          // 3층
-          this.floorData[3].push(data)
-        } else if (parseInt(data.floor) === 4) {
-          // 4층
-          this.floorData[4].push(data)
-        } else if (parseInt(data.floor) === 5) {
-          // 5층
-          this.floorData[5].push(data)
-        } else if (parseInt(data.floor) === 6) {
-          // 6층
-          this.floorData[6].push(data)
+        // console.log(data)
+        data.temp = parseInt((data.temp / 10 - 100) * 10) / 10
+
+        for (let i = 2; i < 7; i++) {
+          if (this.floorSerial[i].includes(data.serial)) {
+            this.floorData[i].push(data)
+            console.log(this.floorData[i])
+          }
         }
       }
+      console.log(this.floorData)
+      // console.log(this.floorData[5][0].serial)
     })
-    // console.log(this.floorData)
   },
   name: 'App',
   components: { InnerBlueprintComponent, Splide, SplideSlide },
