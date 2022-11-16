@@ -209,7 +209,7 @@ const mapF2 = [
   {
     target: '꿈나래방',
     floor: '2',
-    serial: 'V01G1613633',
+    serial: 'UpdateV01G1613633',
     title: '꿈나래방',
     coords: '352,-1,422,58',
     shape: '0'
@@ -249,7 +249,7 @@ const mapF2 = [
   {
     target: '어린이ᆞ유아 자료실',
     floor: '2',
-    serial: 'V01G1613538',
+    serial: 'UpdateV01G1613538',
     title: '어린이ᆞ유아 자료실',
     coords:
       '321,104,290,103,294,81,332,81,334,34,351,35,352,57,409,58,390,73,390,90,402,106,420,109,507,115,506,355,356,355,352,317,290,317,291,202,342,206,356,193,359,127,357,103',
@@ -324,7 +324,7 @@ const mapF3 = [
   {
     target: '사서실',
     floor: '3',
-    serial: 'V01G1613636',
+    serial: 'UpdateV01G1613636',
     title: '사서실',
     coords: '125,336,185,399',
     shape: '0'
@@ -332,7 +332,7 @@ const mapF3 = [
   {
     target: '상호 대차 준비실',
     floor: '3',
-    serial: 'V01G1613630',
+    serial: 'UpdateV01G1613630',
     title: '상호 대차 준비실',
     coords: '182,222,183,247,237,253,237,222',
     shape: 'poly'
@@ -340,7 +340,7 @@ const mapF3 = [
   {
     target: '자료 정리실',
     floor: '3',
-    serial: 'V01G1613631',
+    serial: 'UpdateV01G1613631',
     title: '자료 정리실',
     coords: '292,81,344,151',
     shape: 'rect'
@@ -368,7 +368,7 @@ const mapF4 = [
   {
     floor: '4',
     target: '문화 강연방 I',
-    serial: 'V01G1613626',
+    serial: 'UpdateV01G1613626',
     title: '문화 강연방 I',
     coords: '66,222,96,286',
     shape: '0'
@@ -634,7 +634,7 @@ const mapF5 = [
   },
   {
     target: '무용 연습실',
-    serial: 'V01G1613623',
+    serial: 'UpdateV01G1613623',
     title: '무용 연습실',
     coords: '398,334,507,399',
     shape: 'rect',
@@ -652,7 +652,7 @@ const mapF6 = [
   },
   {
     target: '마중홀',
-    serial: 'V01G1613544',
+    serial: 'V01G1613600',
     title: '마중홀',
     coords: '342,201,340,334,356,335,355,399,506,398,505,198',
     shape: 'poly',

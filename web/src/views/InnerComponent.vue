@@ -38,7 +38,7 @@
             </button>
           </div>
           <!--센서가 존재할 시-->
-          <div v-if="active.serial != ''">
+          <div v-if="active.serial[0] == 'V'">
             <!--현재 클릭된 방의 센서값 표 출력-->
             <table class="table">
               <!--센서 이름-->
@@ -66,6 +66,10 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div v-else-if="active.serial">
+            <p class="text-start fs-6">센서 데이터 업데이트 필요</p>
+            <hr />
           </div>
           <div v-else>
             <p class="text-start fs-6">센서 정보 없음</p>
@@ -117,7 +121,7 @@ export default {
           'V01G1613624',
           'V01G1613623'
         ],
-        6: ['V01G1613601', 'V01G1613544']
+        6: ['V01G1613601', 'V01G1613600']
       }
     }
   },
@@ -169,12 +173,10 @@ export default {
         for (let i = 2; i < 7; i++) {
           if (this.floorSerial[i].includes(data.serial)) {
             this.floorData[i].push(data)
-            console.log(this.floorData[i])
           }
         }
       }
-      console.log(this.floorData)
-      // console.log(this.floorData[5][0].serial)
+      // console.log(this.floorData)
     })
   },
   name: 'App',
