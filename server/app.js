@@ -20,10 +20,10 @@ let sql = require('./sql.js');
 const db = {
   database: 'hong', // 생성한 데이터베이스 이름
   connectionLimit: 10,
-  host: 'database-1.cjudcyqtxqxm.us-west-1.rds.amazonaws.com', // 데이터베이스 서버 호스트 주소
+  host: '', // 데이터베이스 서버 호스트 주소
   port: 3306, // 데이터베이스 서버 포트 번호
-  user: 'jihye', // 데이터베이스 계정 정보
-  password: 'jihye0411' // 데이터베이스 계정 정보
+  user: '', // 데이터베이스 계정 정보
+  password: '' // 데이터베이스 계정 정보
 }
 
 const dbPool = require('mysql').createPool(db)
