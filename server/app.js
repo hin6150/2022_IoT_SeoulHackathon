@@ -21,7 +21,7 @@ const db = {
   database: 'hong', // 생성한 데이터베이스 이름
   connectionLimit: 10,
   host: '', // 데이터베이스 서버 호스트 주소
-  port: 3306, // 데이터베이스 서버 포트 번호
+  port: , // 데이터베이스 서버 포트 번호
   user: '', // 데이터베이스 계정 정보
   password: '' // 데이터베이스 계정 정보
 }
